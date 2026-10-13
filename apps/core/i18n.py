@@ -27,6 +27,7 @@ def translated_fields(name: str, field_cls=models.CharField, required_lang: str 
     Only the ``required_lang`` copy is mandatory; the others may be blank.
     Used with ``locals().update(...)`` inside a model body.
     """
+    from django.utils.text import format_lazy
     from django.utils.translation import gettext_lazy as _
 
     labels = {"fa": _("Persian"), "ar": _("Arabic"), "en": _("English")}
@@ -38,7 +39,7 @@ def translated_fields(name: str, field_cls=models.CharField, required_lang: str 
             opts["blank"] = True
             if field_cls is models.CharField:
                 opts.setdefault("default", "")
-        fields[f"{name}_{code}"] = field_cls(verbose_name=f"{verbose} ({labels[code]})", **opts)
+        fields[f"{name}_{code}"] = field_cls(verbose_name=format_lazy("{} ({})", verbose, labels[code]), **opts)
     return fields
 
 
