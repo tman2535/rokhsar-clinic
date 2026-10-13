@@ -4,32 +4,53 @@
 
 سایت سه‌زبانه (فارسی، عربی، انگلیسی) با حالت تاریک، اسلایدر قبل و بعد، فرم رزرو کنار هر خدمت، چت با دکتر یا منشی که صفحه و بخشِ در حال مطالعهٔ بیمار را هم می‌فرستد، پنل جداگانهٔ دکتر و منشی، و اطلاع‌رسانی به تلگرام، بله، ایتا، واتساپ، ایمیل و وب‌هوک.
 
+## تصاویر
+
+| صفحهٔ اصلی | حالت تاریک |
+|---|---|
+| ![صفحهٔ اصلی](docs/screenshots/home-light.jpg) | ![حالت تاریک](docs/screenshots/home-dark.jpg) |
+
+| صفحهٔ خدمت با فرم رزرو کناری | چت بیمار (صفحه و بخش همراه پیام می‌رود) |
+|---|---|
+| ![صفحهٔ خدمت](docs/screenshots/procedure.jpg) | ![چت](docs/screenshots/chat-visitor.jpg) |
+
+| پنل — پیشخوان | پنل — گفتگو با بیمار |
+|---|---|
+| ![پیشخوان](docs/screenshots/panel-dashboard.jpg) | ![گفتگو](docs/screenshots/panel-chat.jpg) |
+
+| موبایل | رزرو با تقویم شمسی |
+|---|---|
+| <img src="docs/screenshots/home-mobile.jpg" width="300"> | <img src="docs/screenshots/booking-mobile.jpg" width="300"> |
+
 ---
 
-## ۱. اجرای سریع (اولین بار)
+## ۱. اجرای سریع روی کامپیوتر خودتان
 
-پیش‌نیاز: Python نسخهٔ ۳.۱۰ یا بالاتر.
+پیش‌نیاز فقط **Python نسخهٔ ۳.۱۰ یا بالاتر** است (در ویندوز موقع نصب تیک «Add python.exe to PATH» را بزنید). اینترنت فقط بار اول برای نصب پکیج‌ها لازم است.
 
-**ویندوز:** روی فایل `run.bat` دو بار کلیک کنید.
+| سیستم | کاری که می‌کنید |
+|---|---|
+| ویندوز | پوشهٔ پروژه را از zip خارج کنید و روی `run.bat` دو بار کلیک کنید |
+| لینوکس / مک | در ترمینال داخل پوشهٔ پروژه: `bash run.sh` |
 
-**لینوکس / مک:**
+اسکریپت به ترتیب این کارها را انجام می‌دهد و مرحله‌ها را با شماره نشان می‌دهد:
+
+1. ساخت محیط مجازی `.venv` (فقط بار اول)
+2. نصب پکیج‌ها از `requirements.txt` (بار اول چند دقیقه طول می‌کشد)
+3. ساخت `.env` از روی `.env.example` (اگر وجود نداشته باشد) و ساخت دیتابیس
+4. بارگذاری محتوای نمونه و حساب‌ها — **فقط وقتی دیتابیس خالی است**؛ ویرایش‌های شما در اجراهای بعدی دست نمی‌خورد
+5. روشن کردن سرور روی `http://127.0.0.1:8000` و باز کردن خودکار مرورگر
+
+برای خاموش کردن سرور `Ctrl+C` را بزنید. برای اجرای دوباره همان فایل را دوباره اجرا کنید.
+در لینوکس/مک پورت را می‌شود عوض کرد: `PORT=9000 bash run.sh`
+
+اگر بعداً خواستید محتوای نمونه دوباره از نو بارگذاری شود (مثلاً بعد از گرفتن نسخهٔ جدید پروژه):
 
 ```bash
-./run.sh
-```
-
-این اسکریپت محیط مجازی می‌سازد، پکیج‌ها را نصب می‌کند، دیتابیس را می‌سازد، محتوای نمونه را بارگذاری می‌کند و سرور را روی `http://127.0.0.1:8000` بالا می‌آورد. اجرای دوباره‌اش هم مشکلی ایجاد نمی‌کند.
-
-### اجرای دستی (اگر اسکریپت نخواستید)
-
-```bash
-python -m venv .venv
-# ویندوز:  .venv\Scripts\activate      لینوکس/مک:  source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env            # ویندوز: copy .env.example .env
-python manage.py migrate
-python manage.py seed_demo
-python manage.py runserver
+# ویندوز
+.venv\Scripts\python manage.py seed_demo
+# لینوکس / مک
+.venv/bin/python manage.py seed_demo
 ```
 
 ## ۲. آدرس‌ها و حساب‌های نمونه
@@ -120,38 +141,39 @@ python locale/build_locale.py     # .po ها را پر و .mo ها را می‌�
 
 نیازی به نصب gettext نیست.
 
-## ۷. انتشار روی سرور (Production)
+## ۷. انتشار روی سرور لینوکس (Production)
+
+همهٔ فایل‌های لازم در پوشهٔ `deploy/` هستند. مسیر نمونه `/srv/rokhsar` و دامنهٔ نمونه `example.ir` است؛ این دو را با مقدار خودتان عوض کنید.
 
 ```bash
-cp .env.example .env
-# در .env:
-#   DJANGO_DEBUG=0
-#   DJANGO_SECRET_KEY=یک رشتهٔ طولانی تصادفی
-#   DJANGO_ALLOWED_HOSTS=example.ir,www.example.ir
-#   DJANGO_CSRF_TRUSTED_ORIGINS=https://example.ir,https://www.example.ir
-#   SITE_BASE_URL=https://example.ir
-python manage.py migrate
-python manage.py collectstatic --noinput
-gunicorn config.wsgi -b 127.0.0.1:8000 -w 3
+# ۱) پیش‌نیازها (اوبونتو / دبیان)
+sudo apt update && sudo apt install -y python3 python3-venv nginx certbot python3-certbot-nginx
+
+# ۲) پروژه را در /srv/rokhsar قرار دهید، سپس اجرای اول (کلید امن و .env را خودش می‌سازد و حساب مدیر را می‌پرسد)
+cd /srv/rokhsar
+bash deploy/production.sh example.ir
+#    وقتی «Starting gunicorn» را دیدید، با Ctrl+C متوقفش کنید؛ از این به بعد systemd اجرایش می‌کند.
+
+# ۳) دسترسی فایل‌ها برای کاربر سرویس
+sudo chown -R www-data:www-data /srv/rokhsar
+
+# ۴) سرویس همیشه‌روشن
+sudo cp deploy/rokhsar.service /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl enable --now rokhsar
+
+# ۵) nginx و گواهی https
+sudo cp deploy/nginx.conf /etc/nginx/sites-available/rokhsar      # اول داخلش example.ir را عوض کنید
+sudo ln -s /etc/nginx/sites-available/rokhsar /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+sudo certbot --nginx -d example.ir -d www.example.ir
+
+# ۶) بعد از فعال شدن https، در فایل .env مقدار SECURE_COOKIES=1 بگذارید و:
+sudo systemctl restart rokhsar
 ```
 
-نمونهٔ تنظیم nginx:
-
-```nginx
-server {
-    server_name example.ir www.example.ir;
-    client_max_body_size 20M;
-    location /media/ { alias /path/to/rokhsar/media/; }
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
-
-فایل‌های استاتیک با WhiteNoise سرو می‌شوند. اگر nginx ندارید، `SERVE_MEDIA=1` عکس‌های آپلودی را هم از خود جنگو سرو می‌کند. برای پایگاه دادهٔ PostgreSQL متغیرهای `DB_*` را در `.env` پر کنید (و `psycopg[binary]` را نصب کنید).
+- اسکریپت `production.sh` حالت DEBUG را خاموش می‌کند، کلید امن تصادفی می‌سازد، فایل‌های استاتیک را جمع می‌کند و حساب‌های نمونه (`doctor12345` و…) را **نمی‌سازد**. حساب دکتر و منشی را از `/admin/` بسازید و در گروه‌های `doctor` و `secretary` بگذارید.
+- برای به‌روزرسانی پروژه: فایل‌های جدید را جایگزین کنید، `bash deploy/production.sh` را یک بار اجرا و متوقف کنید، سپس `sudo systemctl restart rokhsar`.
+- برای پایگاه دادهٔ PostgreSQL متغیرهای `DB_*` را در `.env` پر کنید و `pip install "psycopg[binary]"` را داخل `.venv` اجرا کنید.
 
 ## ۸. تست‌ها
 

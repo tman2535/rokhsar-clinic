@@ -1,7 +1,8 @@
 """Load demo content (treatments, before/after cases, FAQs, sample stories) and staff accounts.
 
-    python manage.py seed_demo            # content + demo users
-    python manage.py seed_demo --reset    # wipe demo content first
+    python manage.py seed_demo              # (re)load demo content + demo users — overwrites edited demo rows
+    python manage.py seed_demo --if-empty   # only on an empty database (used by the run scripts)
+    python manage.py seed_demo --reset      # wipe treatments/cases/FAQs/stories first
 
 Everything is editable afterwards in /admin/. Replace the sample doctor,
 stories and illustrations with real, consented material before launch.
@@ -33,9 +34,16 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("--reset", action="store_true", help="Delete existing treatments, cases, FAQs and stories first.")
         parser.add_argument("--no-users", action="store_true", help="Do not create demo staff accounts.")
+        parser.add_argument("--if-empty", action="store_true",
+                            help="Only load content when there are no treatments yet (safe to run on every start).")
 
     @transaction.atomic
     def handle(self, *args, **opts):
+        if opts["if_empty"] and Procedure.objects.exists():
+            if not opts["no_users"]:
+                self._users()
+            self.stdout.write("Content already present — leaving your edits untouched.")
+            return
         if opts["reset"]:
             ResultCase.objects.all().delete()
             FAQ.objects.all().delete()
