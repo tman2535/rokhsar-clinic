@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Before and after gallery" %} — {{ clinic|tr:"clinic_name" }}{% endblock %}
+{% block content %}
+<header class="container page-head">
+  <h1>{% translate "Before and after gallery" %}</h1>
+  <p>{% translate "Drag the line on each photo. Every case is shown with the patient's written consent." %}</p>
+</header>
+<section class="container" style="padding:24px var(--gutter) 96px" aria-label="{% translate 'Before and after gallery' %}">
+  <div class="tabs" role="tablist" aria-label="{% translate 'Result categories' %}" data-filter-group="gallery">
+    <button class="tab" role="tab" aria-selected="true" data-filter="all">{% translate "All" %}</button>
+    {% for cat in case_categories %}<button class="tab" role="tab" aria-selected="false" data-filter="{{ cat.slug }}">{{ cat|tr:"name" }}</button>{% endfor %}
+  </div>
+  <div class="ba-grid" data-filter-items="gallery">
+    {% for case in cases %}
+    <div data-cat="{{ case.procedure.category.slug }}">{% include "partials/ba_slider.html" with case=case %}</div>
+    {% empty %}
+    <p>{% translate "Photos will be added soon." %}</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

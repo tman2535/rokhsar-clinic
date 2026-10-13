@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Page not found" %}{% endblock %}
+{% block content %}
+<div class="empty">
+  <h1>{% translate "Page not found" %}</h1>
+  <p>{% translate "The address may have changed. Start from the home page or browse treatments." %}</p>
+  <a class="btn btn--navy" href="{% url 'core:home' %}">{% translate "Back to home" %}</a>
+  <a class="btn btn--line" href="{% url 'procedures:list' %}">{% translate "All treatments" %}</a>
+</div>
+{% endblock %}

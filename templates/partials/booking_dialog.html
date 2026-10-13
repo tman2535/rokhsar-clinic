@@ -1,0 +1,11 @@
+{% load i18n %}
+<dialog class="sheet" id="booking-dialog" aria-labelledby="booking-dialog-title" data-booking-dialog>
+  <div class="sheet__head">
+    <div>
+      <h2 class="sheet__title" id="booking-dialog-title">{% translate "Book a consultation" %}</h2>
+      <p class="sheet__sub">{% translate "Takes under a minute. No payment needed." %}</p>
+    </div>
+    <button class="icon-btn" type="button" data-close-dialog aria-label="{% translate 'Close' %}">{% icon "close" %}</button>
+  </div>
+  {% include "partials/booking_form.html" with fid="dlg" tone="light" selected=None %}
+</dialog>

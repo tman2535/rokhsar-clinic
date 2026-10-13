@@ -1,0 +1,6 @@
+Django>=5.1,<5.2
+Pillow>=10.0
+requests>=2.31
+whitenoise>=6.6
+polib>=1.2
+gunicorn>=22.0 ; sys_platform != "win32"

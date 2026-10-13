@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ clinic|tr:"clinic_name" }} — {% translate "Plastic and cosmetic surgery" %}{% endblock %}
+{% block body_class %}page-home{% endblock %}
+
+{% block content %}
+{% comment %}
+  1. Hero — a light panel that runs up under the floating navy header. One idea per row:
+  badge → headline → one sentence → two actions → the before/after slider.
+  The slider follows the mouse; a soft light in the background follows it too.
+{% endcomment %}
+<section class="hero" aria-labelledby="hero-title" data-hero>
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <p class="hero__badge"><span class="hero__dot" aria-hidden="true"></span>{% translate "Facial and body plastic surgery clinic" %}</p>
+    <h1 class="hero__title" id="hero-title">
+      <span class="hero__line">{% translate "Natural results," %}</span>
+      <span class="hero__line hero__line--accent">{% translate "planned to the millimetre" %}</span>
+    </h1>
+    <p class="hero__lead">{% translate "A face-to-face consultation, a written plan and a year of follow-up — all with the surgeon who performs your operation." %}</p>
+    <div class="hero__actions">
+      <button class="btn btn--gold btn--lg" type="button" data-open-booking>{% icon "calendar" %} {% translate "Book a visit" %}</button>
+      <a class="btn btn--line btn--lg" href="#results">{% translate "See patient results" %}</a>
+    </div>
+  </div>
+
+  {% if hero_case %}
+  <div class="hero__visual">
+    {% include "partials/ba_slider.html" with case=hero_case eager=True hero=True %}
+  </div>
+  {% endif %}
+</section>
+
+{# ───────────────────────── 2. Proof — four plain figures, no boxes ───────────────────────── #}
+<section class="proof" aria-label="{% translate 'Why patients trust us' %}">
+  <dl class="container proof__list">
+    <div><dt>{% translate "Years of experience" %}</dt><dd>{{ clinic.years_experience|ldigits }}+</dd></div>
+    <div><dt>{% translate "Procedures performed" %}</dt><dd>{{ clinic.procedures_count|ldigits }}+</dd></div>
+    <div><dt>{% translate "Patients who would recommend us" %}</dt><dd>{{ clinic.satisfaction_rate|ldigits }}{% if LANG == "en" %}%{% else %}٪{% endif %}</dd></div>
+    <div><dt>{% translate "Follow-up after surgery" %}</dt><dd>{% blocktranslate with m=12|ldigits %}{{ m }} months{% endblocktranslate %}</dd></div>
+  </dl>
+</section>
+
+{# ───────────────────────── 3. Treatments ───────────────────────── #}
+<section class="section section--ivory" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">{% translate "Treatments" %}</p>
+      <h2 class="section__title" id="services-title">{% translate "Choose what you would like to change" %}</h2>
+      <p class="section__sub">{% translate "Each treatment page explains who it suits, how it is done, recovery and risks — with a booking form right beside it." %}</p>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="{% translate 'Treatment categories' %}" data-filter-group="services">
+      <button class="tab" role="tab" aria-selected="true" data-filter="all">{% translate "All" %}</button>
+      {% for cat in categories %}
+      <button class="tab" role="tab" aria-selected="false" data-filter="{{ cat.slug }}">{% icon cat.icon %} {{ cat|tr:"name" }}</button>
+      {% endfor %}
+    </div>
+
+    <ul class="cards" data-filter-items="services">
+      {% for cat in categories %}{% for p in cat.featured %}
+      <li class="card" data-cat="{{ cat.slug }}">
+        <span class="card__icon">{% icon p.icon %}</span>
+        <h3 class="card__title"><a href="{{ p.get_absolute_url }}">{{ p|tr:"title" }}</a></h3>
+        <p class="card__text">{{ p|tr:"summary" }}</p>
+        <dl class="card__facts">
+          <div><dt>{% icon "clock" %}<span class="sr-only">{% translate "Duration" %}</span></dt><dd>{{ p|tr:"duration" }}</dd></div>
+          <div><dt>{% icon "heart" %}<span class="sr-only">{% translate "Back to routine" %}</span></dt><dd>{{ p|tr:"recovery" }}</dd></div>
+        </dl>
+        <div class="card__actions">
+          <a class="link" href="{{ p.get_absolute_url }}">{% translate "Learn more" %} {% icon "arrow" "flip-rtl" %}</a>
+          <button class="btn btn--line btn--sm" type="button" data-open-booking="{{ p.pk }}">{% translate "Book" %}</button>
+        </div>
+      </li>
+      {% endfor %}{% endfor %}
+    </ul>
+  </div>
+</section>
+
+{# ───────────────────────── 4. Results ───────────────────────── #}
+{% if cases %}
+<section class="section section--mist" id="results" aria-labelledby="results-title">
+  <div class="container">
+    <header class="section__head section__head--split">
+      <div>
+        <p class="eyebrow">{% translate "Patient results" %}</p>
+        <h2 class="section__title" id="results-title">{% translate "Real changes, side by side" %}</h2>
+        <p class="section__sub">{% translate "Drag the line on each photo. Every case is shown with the patient's written consent." %}</p>
+      </div>
+      <a class="btn btn--line" href="{% url 'procedures:results' %}">{% translate "Full gallery" %}</a>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="{% translate 'Result categories' %}" data-filter-group="results">
+      <button class="tab" role="tab" aria-selected="true" data-filter="all">{% translate "All" %}</button>
+      {% for cat in case_categories %}
+      <button class="tab" role="tab" aria-selected="false" data-filter="{{ cat.slug }}">{{ cat|tr:"name" }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="ba-grid" data-filter-items="results">
+      {% for case in cases|slice:":6" %}
+      <div data-cat="{{ case.procedure.category.slug }}">{% include "partials/ba_slider.html" with case=case %}</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ───────────────────────── 5. Journey ───────────────────────── #}
+<section class="section section--ivory" aria-labelledby="journey-title">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">{% translate "How it works" %}</p>
+      <h2 class="section__title" id="journey-title">{% translate "From first visit to final result" %}</h2>
+    </header>
+    <ol class="journey">
+      <li class="journey__step">
+        <span class="journey__num" aria-hidden="true">{{ 1|ldigits }}</span>
+        <h3>{% translate "Consultation" %}</h3>
+        <p>{% translate "Examination, your goals and photos. The doctor tells you plainly what is achievable for you." %}</p>
+      </li>
+      <li class="journey__step">
+        <span class="journey__num" aria-hidden="true">{{ 2|ldigits }}</span>
+        <h3>{% translate "Plan and preparation" %}</h3>
+        <p>{% translate "A written plan, the cost, tests and pre-operative instructions, so nothing comes as a surprise." %}</p>
+      </li>
+      <li class="journey__step">
+        <span class="journey__num" aria-hidden="true">{{ 3|ldigits }}</span>
+        <h3>{% translate "Treatment day" %}</h3>
+        <p>{% translate "Performed by the same surgeon, in an accredited hospital with an anaesthetist present." %}</p>
+      </li>
+      <li class="journey__step">
+        <span class="journey__num" aria-hidden="true">{{ 4|ldigits }}</span>
+        <h3>{% translate "Recovery and follow-up" %}</h3>
+        <p>{% translate "Scheduled check-ups and a direct line to the clinic for twelve months." %}</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+{# ───────────────────────── 6. Doctor ───────────────────────── #}
+<section class="section section--mist" id="doctor" aria-labelledby="doctor-title">
+  <div class="container doctor">
+    <div class="doctor__media">
+      {% if clinic.doctor_photo %}
+      <img src="{{ clinic.doctor_photo.url }}" alt="{{ clinic|tr:'doctor_name' }}" width="900" height="1200" loading="lazy">
+      {% else %}
+      {% load static %}<img src="{% static 'img/doctor.webp' %}" alt="" width="900" height="1200" loading="lazy">
+      {% endif %}
+
+    </div>
+    <div class="doctor__body">
+      <p class="eyebrow">{% translate "Your surgeon" %}</p>
+      <h2 class="section__title" id="doctor-title">{{ clinic|tr:"doctor_name" }}</h2>
+      <p class="doctor__title">{{ clinic|tr:"doctor_title" }}</p>
+      <div class="prose">{{ clinic|tr:"doctor_bio"|rich }}</div>
+      {% if clinic.license_number %}<p class="doctor__license">{% icon "shield" %} {% translate "Medical council no." %} <b>{{ clinic.license_number|ldigits }}</b></p>{% endif %}
+      <button class="btn btn--navy" type="button" data-open-chat="doctor">{% icon "chat" %} {% translate "Ask the doctor a question" %}</button>
+    </div>
+  </div>
+</section>
+
+{# ───────────────────────── 7. Testimonials ───────────────────────── #}
+{% if testimonials %}
+<section class="section section--ivory" aria-labelledby="stories-title">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">{% translate "Patient stories" %}</p>
+      <h2 class="section__title" id="stories-title">{% translate "In their own words" %}</h2>
+    </header>
+    <ul class="quotes">
+      {% for t in testimonials %}
+      <li class="quote">
+        {% icon "quote" "quote__mark" %}
+        <blockquote><p>{{ t|tr:"text" }}</p></blockquote>
+        <div class="quote__foot">
+          <div>
+            <p class="quote__name">{{ t.name }}</p>
+            <p class="quote__meta">{% if t.procedure %}{{ t.procedure|tr:"title" }} · {% endif %}{% blocktranslate with m=t.months_after|ldigits count months=t.months_after %}{{ m }} month after{% plural %}{{ m }} months after{% endblocktranslate %}</p>
+          </div>
+          <span class="stars" role="img" aria-label="{% blocktranslate with r=t.rating %}{{ r }} out of 5{% endblocktranslate %}">{% for i in "12345" %}{% if forloop.counter <= t.rating %}{% icon "star" %}{% endif %}{% endfor %}</span>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{# ───────────────────────── 8. FAQ ───────────────────────── #}
+{% if faqs %}
+<section class="section section--mist" id="faq" aria-labelledby="faq-title">
+  <div class="container faq-wrap">
+    <header class="section__head">
+      <p class="eyebrow">{% translate "Questions" %}</p>
+      <h2 class="section__title" id="faq-title">{% translate "Before you book" %}</h2>
+      <p class="section__sub">{% translate "Can't find your answer? Ask the secretary in the chat." %}</p>
+      <button class="btn btn--line" type="button" data-open-chat="secretary">{% icon "chat" %} {% translate "Ask a question" %}</button>
+    </header>
+    <div class="faq">
+      {% for f in faqs %}
+      <details class="faq__item"{% if forloop.first %} open{% endif %}>
+        <summary>{{ f|tr:"question" }}{% icon "plus" "faq__ic" %}</summary>
+        <div class="faq__a">{{ f|tr:"answer"|rich }}</div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ───────────────────────── 9. Booking ───────────────────────── #}
+<section class="booking" id="contact" aria-labelledby="booking-title">
+  <div class="container booking__grid">
+    <div class="booking__info">
+      <p class="hero__label">{% translate "Book a visit" %}</p>
+      <h2 class="booking__title" id="booking-title">{% translate "Reserve a consultation in under a minute" %}</h2>
+      <p class="booking__lead">{% translate "Pick a treatment, a day and a time. The secretary calls you the same working day to confirm." %}</p>
+      <ul class="booking__contact">
+        {% if clinic.phone %}<li>{% icon "phone" %}<div><span>{% translate "Phone" %}</span><a href="tel:{{ clinic.phone }}" dir="ltr">{{ clinic.phone|ldigits }}</a></div></li>{% endif %}
+        {% if clinic|tr:"address" %}<li>{% icon "pin" %}<div><span>{% translate "Address" %}</span><p>{{ clinic|tr:"address" }}</p></div></li>{% endif %}
+        {% if clinic|tr:"working_hours" %}<li>{% icon "clock" %}<div><span>{% translate "Opening hours" %}</span><p>{{ clinic|tr:"working_hours" }}</p></div></li>{% endif %}
+      </ul>
+      <button class="btn btn--line-dark" type="button" data-open-chat="secretary">{% icon "chat" %} {% translate "Prefer to ask first? Chat with us" %}</button>
+    </div>
+    <div class="booking__card">
+      {% include "partials/booking_form.html" with fid="home" tone="dark" selected=None %}
+    </div>
+  </div>
+</section>
+{% endblock %}

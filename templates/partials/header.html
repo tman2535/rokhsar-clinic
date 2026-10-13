@@ -1,0 +1,88 @@
+{% load i18n %}{% url 'core:home' as home_url %}
+<header class="site-header" data-header>
+  <div class="site-header__bar">
+    <a class="brand" href="{{ home_url }}" aria-label="{{ clinic|tr:'clinic_name' }} — {% translate 'Home' %}">
+      {% icon "logo" "brand__mark" %}
+      <span class="brand__name">{{ clinic|tr:"clinic_name" }}</span>
+    </a>
+
+    <nav class="nav" aria-label="{% translate 'Main menu' %}">
+      <div class="nav__item nav__item--mega" data-mega>
+        <button class="nav__link" type="button" aria-expanded="false" aria-controls="mega-menu" data-mega-toggle>
+          {% translate "Treatments" %} {% icon "chev-down" "nav__chev" %}
+        </button>
+        <div class="mega" id="mega-menu" hidden>
+          <div class="mega__grid">
+            {% for cat in NAV_CATEGORIES %}{% if cat.live_procedures %}
+            <div class="mega__col">
+              <p class="mega__title">{% icon cat.icon %} {{ cat|tr:"name" }}</p>
+              <ul>
+                {% for p in cat.live_procedures %}
+                <li><a href="{{ p.get_absolute_url }}">{{ p|tr:"title" }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}{% endfor %}
+          </div>
+          <a class="mega__all" href="{% url 'procedures:list' %}">{% translate "See all treatments" %} {% icon "arrow" "flip-rtl" %}</a>
+        </div>
+      </div>
+      <a class="nav__link" href="{% url 'procedures:results' %}">{% translate "Before & after" %}</a>
+      <a class="nav__link" href="{{ home_url }}#doctor">{% translate "The doctor" %}</a>
+      <a class="nav__link" href="{{ home_url }}#faq">{% translate "Questions" %}</a>
+      <a class="nav__link" href="{{ home_url }}#contact">{% translate "Contact" %}</a>
+    </nav>
+
+    <div class="site-header__actions">
+      <div class="lang" data-lang>
+        <button class="icon-btn lang__btn" type="button" aria-haspopup="true" aria-expanded="false" data-lang-toggle
+                aria-label="{% translate 'Change language' %}">
+          {% icon "globe" %}<span class="lang__code">{{ LANG_META|get_item:LANG|get_item:"short" }}</span>
+        </button>
+        <ul class="lang__menu" role="menu" hidden>
+          {% for code in LANG_CODES %}
+          <li role="none">
+            <a role="menuitem" href="{% lang_url code %}" hreflang="{{ code }}" lang="{{ code }}"
+               {% if code == LANG %}aria-current="true"{% endif %} data-set-lang="{{ code }}">
+              {{ LANG_META|get_item:code|get_item:"native" }}
+              {% if code == LANG %}{% icon "check" %}{% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="{% translate 'Switch light or dark mode' %}">
+        {% icon "moon" "theme-ic theme-ic--moon" %}{% icon "sun" "theme-ic theme-ic--sun" %}
+      </button>
+      <button class="btn btn--gold btn--sm site-header__cta" type="button" data-open-booking>
+        {% icon "calendar" %}<span>{% translate "Book a visit" %}</span>
+      </button>
+      <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle
+              aria-label="{% translate 'Open menu' %}">
+        {% icon "menu" "menu-btn__open" %}{% icon "close" "menu-btn__close" %}
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="{% translate 'Main menu' %}">
+      <details class="mobile-menu__group">
+        <summary>{% translate "Treatments" %} {% icon "chev-down" %}</summary>
+        {% for cat in NAV_CATEGORIES %}{% if cat.live_procedures %}
+        <p class="mobile-menu__cat">{{ cat|tr:"name" }}</p>
+        {% for p in cat.live_procedures %}<a href="{{ p.get_absolute_url }}">{{ p|tr:"title" }}</a>{% endfor %}
+        {% endif %}{% endfor %}
+      </details>
+      <a href="{% url 'procedures:results' %}">{% translate "Before & after" %}</a>
+      <a href="{{ home_url }}#doctor">{% translate "The doctor" %}</a>
+      <a href="{{ home_url }}#faq">{% translate "Questions" %}</a>
+      <a href="{{ home_url }}#contact">{% translate "Contact" %}</a>
+    </nav>
+    <div class="mobile-menu__langs">
+      {% for code in LANG_CODES %}
+      <a href="{% lang_url code %}" hreflang="{{ code }}" lang="{{ code }}" data-set-lang="{{ code }}" {% if code == LANG %}aria-current="true"{% endif %}>{{ LANG_META|get_item:code|get_item:"native" }}</a>
+      {% endfor %}
+    </div>
+    {% if clinic.phone %}<a class="mobile-menu__call" href="tel:{{ clinic.phone }}">{% icon "phone" %} <span dir="ltr">{{ clinic.phone|ldigits }}</span></a>{% endif %}
+  </div>
+</header>

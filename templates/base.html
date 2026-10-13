@@ -1,0 +1,52 @@
+{% load static i18n %}<!doctype html>
+<html lang="{{ LANG }}" dir="{{ DIR }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block title %}{{ clinic|tr:"clinic_name" }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ clinic|tr:"tagline" }}{% endblock %}">
+  <link rel="canonical" href="{% absolute_url %}">
+  {% for code in LANG_CODES %}<link rel="alternate" hreflang="{{ code }}" href="{{ request.scheme }}://{{ request.get_host }}{% lang_url code %}">
+  {% endfor %}<link rel="alternate" hreflang="x-default" href="{{ request.scheme }}://{{ request.get_host }}{% lang_url 'fa' %}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ clinic|tr:"clinic_name" }}">
+  <meta property="og:title" content="{% block og_title %}{{ clinic|tr:"clinic_name" }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ clinic|tr:"tagline" }}{% endblock %}">
+  <meta property="og:locale" content="{% if LANG == 'fa' %}fa_IR{% elif LANG == 'ar' %}ar_AR{% else %}en_US{% endif %}">
+  <meta name="theme-color" content="#0F1F3D">
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="preload" href="{% static 'fonts/Vazirmatn-Variable.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <script>
+    /* Apply the saved theme before first paint so there is no flash. */
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("rk-theme"); } catch (e) {}
+      if (t !== "light" && t !== "dark") {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  {% if jsonld %}<script type="application/ld+json">{{ jsonld }}</script>{% endif %}
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip" href="#main">{% translate "Skip to content" %}</a>
+  {% include "partials/sprite.html" %}
+  {% include "partials/header.html" %}
+
+  <main id="main" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "partials/footer.html" %}
+  {% include "partials/booking_dialog.html" %}
+  {% include "partials/chat_widget.html" %}
+
+  {{ RK_CONFIG|json_script:"rk-config" }}
+  {{ page_context|default_if_none:""|json_script:"page-context" }}
+  <script src="{% static 'js/site.js' %}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,1787 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-14 00:36+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: apps/bookings/forms.py:63 templates/partials/booking_form.html:15
+msgid "Choose a treatment"
+msgstr "اختر العلاج"
+
+#: apps/bookings/forms.py:75
+msgid "Please write your full name."
+msgstr "يرجى كتابة الاسم الكامل."
+
+#: apps/bookings/forms.py:81 apps/chat/views.py:86
+msgid "Enter a valid mobile number, e.g. 09121234567."
+msgstr "أدخل رقم جوال صحيحاً، مثل 09121234567."
+
+#: apps/bookings/forms.py:87
+msgid "The clinic is not taking appointments on this day."
+msgstr "العيادة لا تستقبل مواعيد في هذا اليوم."
+
+#: apps/bookings/forms.py:96
+msgid "Choose one of the listed times."
+msgstr "اختر أحد الأوقات المتاحة."
+
+#: apps/bookings/forms.py:98
+msgid "This time was just taken. Please pick another."
+msgstr "حُجز هذا الوقت للتو. يرجى اختيار وقت آخر."
+
+#: apps/bookings/models.py:22
+msgid "Awaiting call"
+msgstr "بانتظار الاتصال"
+
+#: apps/bookings/models.py:23
+msgid "Confirmed"
+msgstr "مؤكد"
+
+#: apps/bookings/models.py:24
+msgid "Visited"
+msgstr "تمت الزيارة"
+
+#: apps/bookings/models.py:25
+msgid "No-show"
+msgstr "لم يحضر"
+
+#: apps/bookings/models.py:26
+msgid "Cancelled"
+msgstr "ملغى"
+
+#: apps/bookings/models.py:28 apps/panel/views.py:191
+#: templates/bookings/done.html:9 templates/partials/booking_form.html:83
+msgid "Tracking code"
+msgstr "رمز المتابعة"
+
+#: apps/bookings/models.py:29 apps/panel/views.py:191
+#: templates/partials/booking_form.html:31
+msgid "Full name"
+msgstr "الاسم الكامل"
+
+#: apps/bookings/models.py:30 apps/panel/views.py:191
+#: templates/panel/appointment_detail.html:11
+#: templates/partials/booking_form.html:36
+msgid "Mobile number"
+msgstr "رقم الجوال"
+
+#: apps/bookings/models.py:32 apps/core/models.py:102 apps/panel/views.py:191
+#: apps/procedures/models.py:64 apps/procedures/models.py:109
+#: apps/procedures/models.py:130
+msgid "Procedure"
+msgstr "العلاج"
+
+#: apps/bookings/models.py:35
+msgid "Preferred date"
+msgstr "التاريخ المفضل"
+
+#: apps/bookings/models.py:36 apps/panel/views.py:192
+#: templates/panel/appointment_detail.html:19
+#: templates/partials/booking_form.html:58
+msgid "Time"
+msgstr "الوقت"
+
+#: apps/bookings/models.py:37 apps/panel/views.py:192
+#: templates/panel/appointment_detail.html:21
+#: templates/partials/booking_form.html:67
+msgid "Note"
+msgstr "ملاحظة"
+
+#: apps/bookings/models.py:39 apps/chat/models.py:23 apps/panel/views.py:192
+#: templates/panel/appointments.html:8 templates/panel/appointments.html:43
+#: templates/panel/appointments.html:56
+msgid "Status"
+msgstr "الحالة"
+
+#: apps/bookings/models.py:40
+msgid "Staff note"
+msgstr "ملاحظة داخلية"
+
+#: apps/bookings/models.py:42 templates/panel/appointment_detail.html:23
+msgid "Handled by"
+msgstr "تابعه"
+
+#: apps/bookings/models.py:47
+msgid "Page"
+msgstr "الصفحة"
+
+#: apps/bookings/models.py:48
+msgid "Page title"
+msgstr "عنوان الصفحة"
+
+#: apps/bookings/models.py:49 apps/chat/models.py:26
+msgid "Language"
+msgstr "اللغة"
+
+#: apps/bookings/models.py:52 apps/panel/views.py:192
+msgid "Created"
+msgstr "تاريخ الإنشاء"
+
+#: apps/bookings/models.py:59
+msgid "Appointment"
+msgstr "موعد"
+
+#: apps/bookings/models.py:60 templates/panel/appointments.html:3
+#: templates/panel/appointments.html:4 templates/panel/base.html:28
+msgid "Appointments"
+msgstr "المواعيد"
+
+#: apps/bookings/views.py:26
+msgid ""
+"Too many requests. Please try again in a few minutes or call the clinic."
+msgstr "طلبات كثيرة. حاول بعد دقائق أو اتصل بالعيادة."
+
+#: apps/chat/models.py:14 apps/core/context_processors.py:58
+#: templates/panel/base.html:51 templates/partials/chat_widget.html:35
+msgid "Doctor"
+msgstr "الطبيبة"
+
+#: apps/chat/models.py:15 apps/core/context_processors.py:59
+#: templates/panel/base.html:51 templates/partials/chat_widget.html:31
+msgid "Secretary"
+msgstr "السكرتيرة"
+
+#: apps/chat/models.py:18 templates/panel/base.html:71
+msgid "Open"
+msgstr "مفتوحة"
+
+#: apps/chat/models.py:19 apps/core/context_processors.py:45
+#: templates/panel/chats.html:13
+msgid "Closed"
+msgstr "مغلقة"
+
+#: apps/chat/models.py:22
+msgid "Addressed to"
+msgstr "موجهة إلى"
+
+#: apps/chat/models.py:24
+msgid "Visitor name"
+msgstr "اسم الزائر"
+
+#: apps/chat/models.py:25
+msgid "Visitor phone"
+msgstr "هاتف الزائر"
+
+#: apps/chat/models.py:28
+msgid "Page context"
+msgstr "سياق الصفحة"
+
+#: apps/chat/models.py:30
+msgid "Assigned to"
+msgstr "المسؤول"
+
+#: apps/chat/models.py:35
+msgid "Started"
+msgstr "البداية"
+
+#: apps/chat/models.py:36
+msgid "Last message"
+msgstr "آخر رسالة"
+
+#: apps/chat/models.py:40 templates/panel/appointment_detail.html:52
+#: templates/panel/chats.html:36
+msgid "Conversation"
+msgstr "محادثة"
+
+#: apps/chat/models.py:41 templates/panel/base.html:29
+#: templates/panel/chats.html:3 templates/panel/chats.html:4
+msgid "Conversations"
+msgstr "المحادثات"
+
+#: apps/chat/models.py:57
+msgid "Visitor"
+msgstr "الزائر"
+
+#: apps/chat/models.py:58
+msgid "Staff"
+msgstr "الطاقم"
+
+#: apps/chat/models.py:59
+msgid "System"
+msgstr "النظام"
+
+#: apps/chat/models.py:62
+msgid "Website"
+msgstr "الموقع"
+
+#: apps/chat/models.py:63
+msgid "Telegram"
+msgstr "تيليجرام"
+
+#: apps/chat/models.py:64
+msgid "Bale"
+msgstr "بله"
+
+#: apps/chat/views.py:75
+msgid "Too many conversations. Please call the clinic."
+msgstr "بدأت محادثات كثيرة. يرجى الاتصال بالعيادة."
+
+#: apps/chat/views.py:84
+msgid "Please write your name."
+msgstr "يرجى كتابة اسمك."
+
+#: apps/chat/views.py:88 apps/chat/views.py:114
+msgid "Write your message."
+msgstr "اكتب رسالتك."
+
+#: apps/chat/views.py:110
+msgid "You are sending messages too quickly."
+msgstr "ترسل الرسائل بسرعة كبيرة."
+
+#: apps/core/context_processors.py:42 templates/partials/booking_form.html:49
+#: templates/partials/booking_form.html:52
+msgid "Choose a date"
+msgstr "اختر التاريخ"
+
+#: apps/core/context_processors.py:43
+msgid "Previous month"
+msgstr "الشهر السابق"
+
+#: apps/core/context_processors.py:44
+msgid "Next month"
+msgstr "الشهر التالي"
+
+#: apps/core/context_processors.py:46
+msgid "Loading available times…"
+msgstr "جارٍ تحميل الأوقات المتاحة…"
+
+#: apps/core/context_processors.py:47
+msgid "No free time on this day. Please choose another day."
+msgstr "لا توجد أوقات متاحة في هذا اليوم. اختر يوماً آخر."
+
+#: apps/core/context_processors.py:48 templates/partials/booking_form.html:60
+msgid "Choose a date to see free times."
+msgstr "اختر التاريخ لعرض الأوقات المتاحة."
+
+#: apps/core/context_processors.py:49
+msgid "This field is required."
+msgstr "هذا الحقل مطلوب."
+
+#: apps/core/context_processors.py:50
+msgid "Choose a time."
+msgstr "اختر وقتاً."
+
+#: apps/core/context_processors.py:51
+msgid "Connection problem. Please try again."
+msgstr "مشكلة في الاتصال. حاول مرة أخرى."
+
+#: apps/core/context_processors.py:52
+msgid "Sending…"
+msgstr "جارٍ الإرسال…"
+
+#: apps/core/context_processors.py:53 templates/partials/ba_slider.html:4
+#: templates/partials/ba_slider.html:10
+msgid "Before"
+msgstr "قبل"
+
+#: apps/core/context_processors.py:54 templates/partials/ba_slider.html:7
+#: templates/partials/ba_slider.html:11
+msgid "After"
+msgstr "بعد"
+
+#: apps/core/context_processors.py:55 templates/partials/ba_slider.html:16
+msgid "Drag to compare before and after"
+msgstr "اسحب للمقارنة بين قبل وبعد"
+
+#: apps/core/context_processors.py:56
+msgid "You"
+msgstr "أنت"
+
+#: apps/core/context_processors.py:57 templates/partials/footer.html:23
+#: templates/partials/footer.html:24
+msgid "Clinic"
+msgstr "العيادة"
+
+#: apps/core/context_processors.py:60 apps/procedures/models.py:89
+#: apps/procedures/models.py:96 templates/panel/chats.html:51
+#: templates/panel/chats.html:53
+msgid "Section"
+msgstr "القسم"
+
+#: apps/core/context_processors.py:61 templates/panel/appointments.html:19
+msgid "Today"
+msgstr "اليوم"
+
+#: apps/core/i18n.py:32 config/settings.py:140
+msgid "Persian"
+msgstr "الفارسية"
+
+#: apps/core/i18n.py:32 config/settings.py:141
+msgid "Arabic"
+msgstr "العربية"
+
+#: apps/core/i18n.py:32 config/settings.py:142
+msgid "English"
+msgstr "الإنجليزية"
+
+#: apps/core/models.py:8
+msgid "Saturday"
+msgstr "السبت"
+
+#: apps/core/models.py:9
+msgid "Sunday"
+msgstr "الأحد"
+
+#: apps/core/models.py:10
+msgid "Monday"
+msgstr "الاثنين"
+
+#: apps/core/models.py:11
+msgid "Tuesday"
+msgstr "الثلاثاء"
+
+#: apps/core/models.py:12
+msgid "Wednesday"
+msgstr "الأربعاء"
+
+#: apps/core/models.py:13
+msgid "Thursday"
+msgstr "الخميس"
+
+#: apps/core/models.py:14
+msgid "Friday"
+msgstr "الجمعة"
+
+#: apps/core/models.py:21
+msgid "Clinic name"
+msgstr "اسم العيادة"
+
+#: apps/core/models.py:22
+msgid "Tagline"
+msgstr "الشعار"
+
+#: apps/core/models.py:23
+msgid "Doctor name"
+msgstr "اسم الطبيب"
+
+#: apps/core/models.py:24
+msgid "Doctor speciality"
+msgstr "تخصص الطبيب"
+
+#: apps/core/models.py:25
+msgid "Doctor biography"
+msgstr "نبذة عن الطبيب"
+
+#: apps/core/models.py:26 templates/core/home.html:224
+msgid "Address"
+msgstr "العنوان"
+
+#: apps/core/models.py:27
+msgid "Working hours"
+msgstr "ساعات العمل"
+
+#: apps/core/models.py:29
+msgid "Doctor photo"
+msgstr "صورة الطبيب"
+
+#: apps/core/models.py:30
+msgid "Medical council number"
+msgstr "رقم النقابة الطبية"
+
+#: apps/core/models.py:31 templates/core/home.html:223
+msgid "Phone"
+msgstr "الهاتف"
+
+#: apps/core/models.py:32
+msgid "WhatsApp number"
+msgstr "رقم واتساب"
+
+#: apps/core/models.py:32
+msgid "International format, e.g. 989121234567"
+msgstr "بالصيغة الدولية، مثل 989121234567"
+
+#: apps/core/models.py:33
+msgid "Instagram username"
+msgstr "اسم مستخدم إنستغرام"
+
+#: apps/core/models.py:34
+msgid "Telegram username"
+msgstr "اسم مستخدم تيليجرام"
+
+#: apps/core/models.py:35 apps/notifications/models.py:27
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: apps/core/models.py:36
+msgid "Map link"
+msgstr "رابط الخريطة"
+
+#: apps/core/models.py:38 templates/core/home.html:37
+#: templates/core/home.html:151
+msgid "Years of experience"
+msgstr "سنوات الخبرة"
+
+#: apps/core/models.py:39 templates/core/home.html:38
+#: templates/core/home.html:152
+msgid "Procedures performed"
+msgstr "عملية وعلاج منجز"
+
+#: apps/core/models.py:40
+msgid "Satisfaction rate (%)"
+msgstr "نسبة الرضا (%)"
+
+#: apps/core/models.py:43
+msgid "Time slots"
+msgstr "أوقات المواعيد"
+
+#: apps/core/models.py:46
+msgid "Comma-separated, 24-hour format."
+msgstr "مفصولة بفواصل، بنظام 24 ساعة."
+
+#: apps/core/models.py:48
+msgid "Bookings per slot"
+msgstr "عدد الحجوزات لكل وقت"
+
+#: apps/core/models.py:50
+msgid "Closed weekdays"
+msgstr "أيام الإغلاق"
+
+#: apps/core/models.py:51
+msgid "Comma-separated Python weekday numbers (Monday=0 … Friday=4)."
+msgstr "أرقام الأيام مفصولة بفواصل: الاثنين=0 … الجمعة=4، السبت=5، الأحد=6"
+
+#: apps/core/models.py:53
+msgid "Bookable days ahead"
+msgstr "عدد الأيام المتاحة للحجز"
+
+#: apps/core/models.py:56 apps/core/models.py:57
+msgid "Site settings"
+msgstr "إعدادات الموقع"
+
+#: apps/core/models.py:100
+msgid "Patient name"
+msgstr "اسم المريض"
+
+#: apps/core/models.py:100
+msgid "Use initials if the patient prefers."
+msgstr "استخدم الأحرف الأولى إذا فضّل المريض ذلك."
+
+#: apps/core/models.py:105 apps/procedures/models.py:90
+msgid "Text"
+msgstr "النص"
+
+#: apps/core/models.py:106
+msgid "Rating"
+msgstr "التقييم"
+
+#: apps/core/models.py:107
+msgid "Months after treatment"
+msgstr "أشهر بعد العلاج"
+
+#: apps/core/models.py:108 apps/procedures/models.py:56
+#: apps/procedures/models.py:116 apps/procedures/models.py:138
+msgid "Published"
+msgstr "منشور"
+
+#: apps/core/models.py:109 apps/procedures/models.py:23
+#: apps/procedures/models.py:57 apps/procedures/models.py:91
+#: apps/procedures/models.py:115 apps/procedures/models.py:139
+msgid "Order"
+msgstr "الترتيب"
+
+#: apps/core/models.py:113
+msgid "Testimonial"
+msgstr "رأي مريض"
+
+#: apps/core/models.py:114
+msgid "Testimonials"
+msgstr "آراء المرضى"
+
+#: apps/core/views.py:31
+msgid "Home page"
+msgstr "الصفحة الرئيسية"
+
+#: apps/notifications/models.py:9 templates/panel/base.html:74
+msgid "New appointment request"
+msgstr "طلب موعد جديد"
+
+#: apps/notifications/models.py:10
+msgid "Appointment status changed"
+msgstr "تغيير حالة الموعد"
+
+#: apps/notifications/models.py:11
+msgid "New conversation"
+msgstr "محادثة جديدة"
+
+#: apps/notifications/models.py:12
+msgid "New visitor message"
+msgstr "رسالة جديدة من زائر"
+
+#: apps/notifications/models.py:23
+msgid "Telegram bot"
+msgstr "بوت تيليجرام"
+
+#: apps/notifications/models.py:24
+msgid "Bale bot"
+msgstr "بوت بله"
+
+#: apps/notifications/models.py:25
+msgid "Eitaa (Eitaayar)"
+msgstr "إيتا (إيتايار)"
+
+#: apps/notifications/models.py:26
+msgid "WhatsApp Cloud API"
+msgstr "واتساب (Cloud API)"
+
+#: apps/notifications/models.py:28
+msgid "Webhook (n8n, Make, Zapier …)"
+msgstr "Webhook (n8n وMake وZapier …)"
+
+#: apps/notifications/models.py:30 apps/procedures/models.py:21
+msgid "Name"
+msgstr "الاسم"
+
+#: apps/notifications/models.py:31
+msgid "Type"
+msgstr "النوع"
+
+#: apps/notifications/models.py:32 templates/panel/settings.html:19
+msgid "Active"
+msgstr "مفعّل"
+
+#: apps/notifications/models.py:33
+msgid "Events"
+msgstr "الأحداث"
+
+#: apps/notifications/models.py:36
+msgid "Token / API key"
+msgstr "الرمز / مفتاح API"
+
+#: apps/notifications/models.py:37
+msgid ""
+"Bot token for Telegram/Bale, API token for Eitaayar, access token for "
+"WhatsApp."
+msgstr "رمز البوت لتيليجرام وبله، رمز API لإيتايار، رمز الوصول لواتساب."
+
+#: apps/notifications/models.py:40
+msgid "Recipient"
+msgstr "المستلم"
+
+#: apps/notifications/models.py:41
+msgid ""
+"Chat ID (Telegram/Bale/Eitaa), phone number (WhatsApp), addresses (email, "
+"comma-separated) or URL (webhook)."
+msgstr ""
+"معرّف المحادثة (تيليجرام/بله/إيتا)، رقم الهاتف (واتساب)، العناوين (بريد، "
+"مفصولة بفواصل) أو الرابط (Webhook)."
+
+#: apps/notifications/models.py:44
+msgid "Sender ID"
+msgstr "معرّف المرسل"
+
+#: apps/notifications/models.py:45
+msgid "WhatsApp only: phone-number ID from Meta."
+msgstr "واتساب فقط: معرّف رقم الهاتف من Meta."
+
+#: apps/notifications/models.py:48
+msgid "API address"
+msgstr "عنوان API"
+
+#: apps/notifications/models.py:49
+msgid ""
+"Optional. A relay address if the official API is unreachable from your "
+"server."
+msgstr "اختياري. عنوان وسيط إذا تعذّر الوصول إلى الواجهة الرسمية من خادمك."
+
+#: apps/notifications/models.py:52
+msgid "HTTP proxy"
+msgstr "وكيل HTTP"
+
+#: apps/notifications/models.py:53
+msgid "Optional, e.g. http://user:pass@host:port"
+msgstr "اختياري، مثل http://user:pass@host:port"
+
+#: apps/notifications/models.py:56
+msgid "Allow replies from the bot"
+msgstr "السماح بالرد من البوت"
+
+#: apps/notifications/models.py:57
+msgid ""
+"Telegram/Bale: answer chats and confirm appointments right inside the "
+"messenger."
+msgstr "تيليجرام/بله: الرد على المحادثات وتأكيد المواعيد من داخل التطبيق."
+
+#: apps/notifications/models.py:64
+msgid "Notification channel"
+msgstr "قناة إشعار"
+
+#: apps/notifications/models.py:65 templates/panel/settings.html:9
+msgid "Notification channels"
+msgstr "قنوات الإشعار"
+
+#: apps/notifications/models.py:90
+msgid "Delivery log"
+msgstr "سجل الإرسال"
+
+#: apps/notifications/models.py:91
+msgid "Delivery logs"
+msgstr "سجلات الإرسال"
+
+#: apps/panel/forms.py:24
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: apps/panel/forms.py:25
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: apps/panel/forms.py:41
+msgid "Send for"
+msgstr "الإرسال عند"
+
+#: apps/panel/forms.py:65
+msgid "This channel type needs a token."
+msgstr "هذا النوع يحتاج إلى رمز."
+
+#: apps/panel/forms.py:67
+msgid "Enter where messages should go."
+msgstr "حدّد إلى أين تُرسل الرسائل."
+
+#: apps/panel/forms.py:69
+msgid "WhatsApp needs the phone-number ID."
+msgstr "واتساب يحتاج إلى معرّف رقم الهاتف."
+
+#: apps/panel/forms.py:71
+msgid "Enter a full URL starting with https://"
+msgstr "أدخل رابطاً كاملاً يبدأ بـ https://"
+
+#: apps/panel/views.py:48
+msgid "You do not have access to the panel."
+msgstr "ليس لديك صلاحية الدخول إلى اللوحة."
+
+#: apps/panel/views.py:59
+msgid "Only the doctor or an administrator can change settings."
+msgstr "يمكن للطبيبة أو المدير فقط تغيير الإعدادات."
+
+#: apps/panel/views.py:159
+msgid "Appointment saved."
+msgstr "تم حفظ الموعد."
+
+#: apps/panel/views.py:192 templates/panel/appointments.html:17
+msgid "Date"
+msgstr "التاريخ"
+
+#: apps/panel/views.py:192
+msgid "Gregorian date"
+msgstr "التاريخ الميلادي"
+
+#: apps/panel/views.py:296
+msgid "Booking rules saved."
+msgstr "تم حفظ قواعد الحجز."
+
+#: apps/panel/views.py:310
+msgid "Channel saved."
+msgstr "تم حفظ القناة."
+
+#: apps/panel/views.py:328
+msgid "Test message sent."
+msgstr "تم إرسال رسالة الاختبار."
+
+#: apps/panel/views.py:330 apps/panel/views.py:350
+#, python-format
+msgid "Sending failed: %(detail)s"
+msgstr "فشل الإرسال: %(detail)s"
+
+#: apps/panel/views.py:344
+msgid "Webhooks need a public https address. Set SITE_BASE_URL in .env first."
+msgstr ""
+"يحتاج Webhook إلى عنوان https عام. اضبط SITE_BASE_URL في ملف .env أولاً."
+
+#: apps/panel/views.py:348
+msgid "Bot connection updated."
+msgstr "تم تحديث اتصال البوت."
+
+#: apps/panel/views.py:358
+msgid "Channel deleted."
+msgstr "تم حذف القناة."
+
+#: apps/procedures/models.py:8
+msgid "Nose"
+msgstr "الأنف"
+
+#: apps/procedures/models.py:9
+msgid "Face"
+msgstr "الوجه"
+
+#: apps/procedures/models.py:10
+msgid "Eye"
+msgstr "العين"
+
+#: apps/procedures/models.py:11
+msgid "Body"
+msgstr "الجسم"
+
+#: apps/procedures/models.py:12
+msgid "Injection"
+msgstr "الحقن"
+
+#: apps/procedures/models.py:13
+msgid "Hair"
+msgstr "الشعر"
+
+#: apps/procedures/models.py:14
+msgid "Lips"
+msgstr "الشفاه"
+
+#: apps/procedures/models.py:15
+msgid "Skin"
+msgstr "البشرة"
+
+#: apps/procedures/models.py:20 apps/procedures/models.py:43
+msgid "Slug"
+msgstr "المعرّف في الرابط"
+
+#: apps/procedures/models.py:22 apps/procedures/models.py:44
+msgid "Icon"
+msgstr "الأيقونة"
+
+#: apps/procedures/models.py:27 apps/procedures/models.py:42
+msgid "Category"
+msgstr "الفئة"
+
+#: apps/procedures/models.py:28
+msgid "Categories"
+msgstr "الفئات"
+
+#: apps/procedures/models.py:45 templates/procedures/detail.html:19
+msgid "Surgical"
+msgstr "جراحي"
+
+#: apps/procedures/models.py:46 apps/procedures/models.py:131
+msgid "Title"
+msgstr "العنوان"
+
+#: apps/procedures/models.py:47
+msgid "Short summary"
+msgstr "ملخص قصير"
+
+#: apps/procedures/models.py:48
+msgid "Introduction"
+msgstr "مقدمة"
+
+#: apps/procedures/models.py:49 templates/core/home.html:67
+#: templates/procedures/detail.html:23 templates/procedures/list.html:20
+msgid "Duration"
+msgstr "المدة"
+
+#: apps/procedures/models.py:50 templates/procedures/detail.html:24
+msgid "Anesthesia"
+msgstr "التخدير"
+
+#: apps/procedures/models.py:51 templates/core/home.html:68
+#: templates/procedures/detail.html:25 templates/procedures/list.html:21
+msgid "Back to routine"
+msgstr "العودة إلى الروتين"
+
+#: apps/procedures/models.py:52
+msgid "Result longevity"
+msgstr "مدة بقاء النتيجة"
+
+#: apps/procedures/models.py:53
+msgid "SEO description"
+msgstr "وصف محركات البحث"
+
+#: apps/procedures/models.py:54
+msgid "Cover image"
+msgstr "صورة الغلاف"
+
+#: apps/procedures/models.py:55
+msgid "Show on home page"
+msgstr "عرض في الصفحة الرئيسية"
+
+#: apps/procedures/models.py:65
+msgid "Procedures"
+msgstr "العلاجات"
+
+#: apps/procedures/models.py:78
+msgid "Is it right for me?"
+msgstr "هل يناسبني؟"
+
+#: apps/procedures/models.py:79 templates/core/home.html:119
+msgid "Consultation"
+msgstr "الاستشارة"
+
+#: apps/procedures/models.py:80
+msgid "Questions to ask"
+msgstr "أسئلة يُستحسن طرحها"
+
+#: apps/procedures/models.py:81
+msgid "Preparation"
+msgstr "التحضير"
+
+#: apps/procedures/models.py:82
+msgid "Procedure steps"
+msgstr "خطوات الإجراء"
+
+#: apps/procedures/models.py:83
+msgid "Recovery"
+msgstr "فترة التعافي"
+
+#: apps/procedures/models.py:84
+msgid "Risks and safety"
+msgstr "المخاطر والسلامة"
+
+#: apps/procedures/models.py:85
+msgid "Results"
+msgstr "النتائج"
+
+#: apps/procedures/models.py:86
+msgid "Cost"
+msgstr "التكلفة"
+
+#: apps/procedures/models.py:97
+msgid "Sections"
+msgstr "الأقسام"
+
+#: apps/procedures/models.py:111
+msgid "Leave empty for a general question shown on the home page."
+msgstr "اتركه فارغاً لسؤال عام يظهر في الصفحة الرئيسية."
+
+#: apps/procedures/models.py:113
+msgid "Question"
+msgstr "السؤال"
+
+#: apps/procedures/models.py:114
+msgid "Answer"
+msgstr "الإجابة"
+
+#: apps/procedures/models.py:120
+msgid "FAQ"
+msgstr "سؤال شائع"
+
+#: apps/procedures/models.py:121
+msgid "FAQs"
+msgstr "الأسئلة الشائعة"
+
+#: apps/procedures/models.py:132
+msgid "Caption"
+msgstr "التعليق"
+
+#: apps/procedures/models.py:133
+msgid "Before photo"
+msgstr "صورة قبل"
+
+#: apps/procedures/models.py:134
+msgid "After photo"
+msgstr "صورة بعد"
+
+#: apps/procedures/models.py:135
+msgid "Months after surgery"
+msgstr "أشهر بعد العملية"
+
+#: apps/procedures/models.py:136
+msgid "Patient consent on file"
+msgstr "موافقة المريض الخطية موجودة"
+
+#: apps/procedures/models.py:137
+msgid "Show in hero"
+msgstr "عرض في واجهة الصفحة"
+
+#: apps/procedures/models.py:145
+msgid "Before / after case"
+msgstr "حالة قبل وبعد"
+
+#: apps/procedures/models.py:146
+msgid "Before / after cases"
+msgstr "حالات قبل وبعد"
+
+#: apps/procedures/views.py:18 templates/core/404.html:9
+#: templates/panel/appointments.html:25 templates/procedures/list.html:3
+#: templates/procedures/list.html:6
+msgid "All treatments"
+msgstr "جميع العلاجات"
+
+#: apps/procedures/views.py:33 templates/partials/header.html:4
+#: templates/procedures/detail.html:12
+msgid "Home"
+msgstr "الرئيسية"
+
+#: apps/procedures/views.py:33 templates/core/home.html:48
+#: templates/partials/footer.html:15 templates/partials/footer.html:16
+#: templates/partials/header.html:12 templates/partials/header.html:70
+#: templates/procedures/detail.html:13
+msgid "Treatments"
+msgstr "العلاجات"
+
+#: apps/procedures/views.py:59 templates/procedures/results.html:3
+#: templates/procedures/results.html:6 templates/procedures/results.html:9
+msgid "Before and after gallery"
+msgstr "معرض قبل وبعد"
+
+#: templates/base.html:35
+msgid "Skip to content"
+msgstr "انتقل إلى المحتوى"
+
+#: templates/bookings/done.html:3 templates/bookings/done.html:7
+#: templates/partials/booking_form.html:81
+msgid "Your request is in"
+msgstr "تم تسجيل طلبك"
+
+#: templates/bookings/done.html:10 templates/core/404.html:8
+msgid "Back to home"
+msgstr "العودة إلى الرئيسية"
+
+#: templates/bookings/form_page.html:3 templates/core/home.html:22
+#: templates/core/home.html:219 templates/partials/footer.html:29
+#: templates/partials/header.html:58 templates/procedures/detail.html:108
+msgid "Book a visit"
+msgstr "احجز موعداً"
+
+#: templates/bookings/form_page.html:6
+#: templates/partials/booking_dialog.html:5
+msgid "Book a consultation"
+msgstr "احجز استشارة"
+
+#: templates/bookings/form_page.html:7
+#: templates/partials/booking_dialog.html:6
+#: templates/procedures/detail.html:78
+msgid "Takes under a minute. No payment needed."
+msgstr "يستغرق أقل من دقيقة. لا حاجة للدفع."
+
+#: templates/core/404.html:3 templates/core/404.html:6
+msgid "Page not found"
+msgstr "الصفحة غير موجودة"
+
+#: templates/core/404.html:7
+msgid ""
+"The address may have changed. Start from the home page or browse treatments."
+msgstr "ربما تغيّر العنوان. ابدأ من الصفحة الرئيسية أو تصفّح العلاجات."
+
+#: templates/core/home.html:4
+msgid "Plastic and cosmetic surgery"
+msgstr "جراحة التجميل والترميم"
+
+#: templates/core/home.html:15
+msgid "Facial and body plastic surgery clinic"
+msgstr "عيادة متخصصة في تجميل الوجه والجسم"
+
+#: templates/core/home.html:17
+msgid "Natural results,"
+msgstr "نتائج طبيعية،"
+
+#: templates/core/home.html:18
+msgid "planned to the millimetre"
+msgstr "مخطط لها بدقة المليمتر"
+
+#: templates/core/home.html:20
+#| msgid ""
+#| "Every treatment starts with a face-to-face consultation, a written plan and "
+#| "an honest picture of recovery — and the surgeon who plans it is the one who "
+#| "performs it."
+msgid ""
+"A face-to-face consultation, a written plan and a year of follow-up — all "
+"with the surgeon who performs your operation."
+msgstr ""
+"استشارة حضورية وخطة مكتوبة ومتابعة لمدة عام — كلها مع الجرّاحة التي تُجري "
+"عمليتك."
+
+#: templates/core/home.html:23
+msgid "See patient results"
+msgstr "شاهد نتائج المرضى"
+
+#: templates/core/home.html:35
+msgid "Why patients trust us"
+msgstr "لماذا يثق بنا المرضى"
+
+#: templates/core/home.html:39
+msgid "Patients who would recommend us"
+msgstr "مرضى يوصون بنا"
+
+#: templates/core/home.html:40
+#| msgid "Months after surgery"
+msgid "Follow-up after surgery"
+msgstr "المتابعة بعد العملية"
+
+#: templates/core/home.html:40
+#, python-format
+#| msgid "%(m)s month after"
+#| msgid_plural "%(m)s months after"
+msgid "%(m)s months"
+msgstr "%(m)s شهراً"
+
+#: templates/core/home.html:49
+msgid "Choose what you would like to change"
+msgstr "اختر ما تودّ تغييره"
+
+#: templates/core/home.html:50
+msgid ""
+"Each treatment page explains who it suits, how it is done, recovery and "
+"risks — with a booking form right beside it."
+msgstr ""
+"تشرح صفحة كل علاج لمن يناسب وكيف يُجرى والتعافي والمخاطر — مع نموذج حجز "
+"بجانبها مباشرة."
+
+#: templates/core/home.html:53
+msgid "Treatment categories"
+msgstr "فئات العلاج"
+
+#: templates/core/home.html:54 templates/core/home.html:94
+#: templates/panel/appointments.html:9 templates/panel/chats.html:10
+#: templates/procedures/results.html:11
+msgid "All"
+msgstr "الكل"
+
+#: templates/core/home.html:71 templates/procedures/detail.html:98
+#: templates/procedures/list.html:24
+msgid "Learn more"
+msgstr "اعرف المزيد"
+
+#: templates/core/home.html:72 templates/procedures/list.html:25
+msgid "Book"
+msgstr "احجز"
+
+#: templates/core/home.html:86
+msgid "Patient results"
+msgstr "نتائج المرضى"
+
+#: templates/core/home.html:87
+msgid "Real changes, side by side"
+msgstr "تغيير حقيقي جنباً إلى جنب"
+
+#: templates/core/home.html:88 templates/procedures/results.html:7
+msgid ""
+"Drag the line on each photo. Every case is shown with the patient's written "
+"consent."
+msgstr "اسحب الخط على كل صورة. تُعرض كل حالة بموافقة المريض الخطية."
+
+#: templates/core/home.html:90
+msgid "Full gallery"
+msgstr "المعرض الكامل"
+
+#: templates/core/home.html:93 templates/procedures/results.html:10
+msgid "Result categories"
+msgstr "فئات النتائج"
+
+#: templates/core/home.html:113
+msgid "How it works"
+msgstr "كيف نعمل"
+
+#: templates/core/home.html:114
+msgid "From first visit to final result"
+msgstr "من الزيارة الأولى إلى النتيجة النهائية"
+
+#: templates/core/home.html:120
+msgid ""
+"Examination, your goals and photos. The doctor tells you plainly what is "
+"achievable for you."
+msgstr ""
+"الفحص والاستماع إلى هدفك والتصوير. تخبرك الطبيبة بصراحة بما هو ممكن لك."
+
+#: templates/core/home.html:124
+msgid "Plan and preparation"
+msgstr "الخطة والتحضير"
+
+#: templates/core/home.html:125
+msgid ""
+"A written plan, the cost, tests and pre-operative instructions, so nothing "
+"comes as a surprise."
+msgstr ""
+"خطة مكتوبة والتكلفة والتحاليل وتعليمات ما قبل العملية، حتى لا تُفاجأ بشيء."
+
+#: templates/core/home.html:129
+msgid "Treatment day"
+msgstr "يوم العلاج"
+
+#: templates/core/home.html:130
+msgid ""
+"Performed by the same surgeon, in an accredited hospital with an "
+"anaesthetist present."
+msgstr "تُجريها الجرّاحة نفسها في مستشفى معتمد وبحضور طبيب تخدير."
+
+#: templates/core/home.html:134
+msgid "Recovery and follow-up"
+msgstr "التعافي والمتابعة"
+
+#: templates/core/home.html:135
+msgid "Scheduled check-ups and a direct line to the clinic for twelve months."
+msgstr "مراجعات دورية وخط مباشر مع العيادة لمدة اثني عشر شهراً."
+
+#: templates/core/home.html:156
+msgid "Your surgeon"
+msgstr "جرّاحتك"
+
+#: templates/core/home.html:160 templates/partials/footer.html:42
+msgid "Medical council no."
+msgstr "رقم النقابة الطبية"
+
+#: templates/core/home.html:161
+msgid "Ask the doctor a question"
+msgstr "اسأل الطبيبة"
+
+#: templates/core/home.html:171
+msgid "Patient stories"
+msgstr "تجارب المرضى"
+
+#: templates/core/home.html:172
+msgid "In their own words"
+msgstr "بكلماتهم"
+
+#: templates/core/home.html:182 templates/partials/ba_slider.html:26
+#, python-format
+msgid "%(m)s month after"
+msgid_plural "%(m)s months after"
+msgstr[0] "بعد %(m)s شهر"
+msgstr[1] "بعد %(m)s شهر"
+msgstr[2] "بعد %(m)s شهر"
+msgstr[3] "بعد %(m)s شهر"
+msgstr[4] "بعد %(m)s شهر"
+msgstr[5] "بعد %(m)s شهر"
+
+#: templates/core/home.html:184
+#, python-format
+msgid "%(r)s out of 5"
+msgstr "%(r)s من 5"
+
+#: templates/core/home.html:198 templates/partials/footer.html:28
+#: templates/partials/header.html:32 templates/partials/header.html:78
+#: templates/procedures/detail.html:36
+msgid "Questions"
+msgstr "الأسئلة"
+
+#: templates/core/home.html:199
+msgid "Before you book"
+msgstr "قبل أن تحجز"
+
+#: templates/core/home.html:200
+msgid "Can't find your answer? Ask the secretary in the chat."
+msgstr "لم تجد إجابتك؟ اسأل السكرتيرة في المحادثة."
+
+#: templates/core/home.html:201
+msgid "Ask a question"
+msgstr "اطرح سؤالاً"
+
+#: templates/core/home.html:220
+msgid "Reserve a consultation in under a minute"
+msgstr "احجز استشارتك في أقل من دقيقة"
+
+#: templates/core/home.html:221
+msgid ""
+"Pick a treatment, a day and a time. The secretary calls you the same working"
+" day to confirm."
+msgstr ""
+"اختر العلاج واليوم والوقت. تتصل بك السكرتيرة في يوم العمل نفسه للتأكيد."
+
+#: templates/core/home.html:225
+msgid "Opening hours"
+msgstr "ساعات الاستقبال"
+
+#: templates/core/home.html:227
+msgid "Prefer to ask first? Chat with us"
+msgstr "تفضّل السؤال أولاً؟ تحدّث معنا"
+
+#: templates/panel/appointment_detail.html:5
+msgid "All appointments"
+msgstr "جميع المواعيد"
+
+#: templates/panel/appointment_detail.html:9
+msgid "Request"
+msgstr "الطلب"
+
+#: templates/panel/appointment_detail.html:14
+msgid "Call"
+msgstr "اتصال"
+
+#: templates/panel/appointment_detail.html:18
+#: templates/panel/appointments.html:24 templates/panel/appointments.html:40
+#: templates/panel/appointments.html:53
+#: templates/partials/booking_form.html:12
+msgid "Treatment"
+msgstr "العلاج"
+
+#: templates/panel/appointment_detail.html:19
+#: templates/partials/booking_form.html:44
+msgid "Preferred day"
+msgstr "اليوم المفضل"
+
+#: templates/panel/appointment_detail.html:20
+msgid "Booked from page"
+msgstr "حُجز من صفحة"
+
+#: templates/panel/appointment_detail.html:22
+#: templates/panel/appointments.html:42 templates/panel/appointments.html:55
+msgid "Received"
+msgstr "الاستلام"
+
+#: templates/panel/appointment_detail.html:28
+msgid "Update"
+msgstr "تحديث"
+
+#: templates/panel/appointment_detail.html:40
+#: templates/panel/channel_form.html:26 templates/panel/settings.html:51
+msgid "Save"
+msgstr "حفظ"
+
+#: templates/panel/appointment_detail.html:46
+msgid "History with this number"
+msgstr "السجل مع هذا الرقم"
+
+#: templates/panel/appointments.html:5
+#, python-format
+msgid "%(n)s requests match"
+msgstr "%(n)s طلباً"
+
+#: templates/panel/appointments.html:15
+msgid "Search"
+msgstr "بحث"
+
+#: templates/panel/appointments.html:16
+msgid "Name, mobile or tracking code"
+msgstr "الاسم أو الجوال أو رمز المتابعة"
+
+#: templates/panel/appointments.html:18
+msgid "Any date"
+msgstr "أي تاريخ"
+
+#: templates/panel/appointments.html:20 templates/panel/dashboard.html:10
+msgid "Next 7 days"
+msgstr "الأيام السبعة القادمة"
+
+#: templates/panel/appointments.html:21
+msgid "Upcoming"
+msgstr "القادمة"
+
+#: templates/panel/appointments.html:22
+msgid "Past"
+msgstr "السابقة"
+
+#: templates/panel/appointments.html:29 templates/panel/chats.html:9
+msgid "Filter"
+msgstr "تصفية"
+
+#: templates/panel/appointments.html:30
+msgid "Excel (CSV)"
+msgstr "تصدير Excel"
+
+#: templates/panel/appointments.html:39 templates/panel/appointments.html:49
+msgid "Patient"
+msgstr "المريض"
+
+#: templates/panel/appointments.html:41 templates/panel/appointments.html:54
+msgid "Date and time"
+msgstr "التاريخ والوقت"
+
+#: templates/panel/appointments.html:60
+msgid "Change status"
+msgstr "تغيير الحالة"
+
+#: templates/panel/appointments.html:71
+msgid "No appointments match these filters."
+msgstr "لا توجد مواعيد مطابقة."
+
+#: templates/panel/appointments.html:76
+msgid "Pages"
+msgstr "الصفحات"
+
+#: templates/panel/appointments.html:77
+msgid "Previous"
+msgstr "السابق"
+
+#: templates/panel/appointments.html:78
+#, python-format
+msgid "Page %(n)s of %(total)s"
+msgstr "صفحة %(n)s من %(total)s"
+
+#: templates/panel/appointments.html:79
+msgid "Next"
+msgstr "التالي"
+
+#: templates/panel/base.html:7 templates/panel/login.html:17
+msgid "Clinic panel"
+msgstr "لوحة العيادة"
+
+#: templates/panel/base.html:24
+msgid "Panel menu"
+msgstr "قائمة اللوحة"
+
+#: templates/panel/base.html:27 templates/panel/dashboard.html:3
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+#: templates/panel/base.html:31 templates/panel/channel_form.html:5
+#: templates/panel/settings.html:3 templates/panel/settings.html:4
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: templates/panel/base.html:35
+msgid "View website"
+msgstr "عرض الموقع"
+
+#: templates/panel/base.html:36
+msgid "Edit content"
+msgstr "تعديل المحتوى"
+
+#: templates/panel/base.html:47 templates/partials/header.html:54
+msgid "Switch light or dark mode"
+msgstr "التبديل بين الوضع الفاتح والداكن"
+
+#: templates/panel/base.html:51
+msgid "Administrator"
+msgstr "المدير"
+
+#: templates/panel/base.html:54
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+#: templates/panel/base.html:74
+msgid "New message from a visitor"
+msgstr "رسالة جديدة من زائر"
+
+#: templates/panel/channel_form.html:3 templates/panel/channel_form.html:4
+msgid "New channel"
+msgstr "قناة جديدة"
+
+#: templates/panel/channel_form.html:31
+msgid "Delete channel"
+msgstr "حذف القناة"
+
+#: templates/panel/channel_form.html:38
+msgid "Test and connect"
+msgstr "اختبار واتصال"
+
+#: templates/panel/channel_form.html:40
+msgid "Send test message"
+msgstr "إرسال رسالة اختبار"
+
+#: templates/panel/channel_form.html:44
+msgid "Bot webhook address"
+msgstr "عنوان Webhook للبوت"
+
+#: templates/panel/channel_form.html:46
+msgid ""
+"Needed for replies and confirm buttons. Your site must be reachable over "
+"https."
+msgstr "مطلوب للرد وأزرار التأكيد. يجب أن يكون موقعك متاحاً عبر https."
+
+#: templates/panel/channel_form.html:48
+msgid "Connect bot"
+msgstr "ربط البوت"
+
+#: templates/panel/channel_form.html:49
+msgid "Disconnect"
+msgstr "فصل"
+
+#: templates/panel/channel_form.html:53
+msgid "Recent deliveries"
+msgstr "آخر عمليات الإرسال"
+
+#: templates/panel/channel_form.html:57
+msgid "Sent"
+msgstr "أُرسل"
+
+#: templates/panel/channel_form.html:57
+msgid "Failed"
+msgstr "فشل"
+
+#: templates/panel/channel_form.html:62
+msgid "Nothing sent yet."
+msgstr "لم يُرسل شيء بعد."
+
+#: templates/panel/chats.html:5
+msgid ""
+"Visitors write from any page — you see which page and section they were "
+"reading."
+msgstr "يكتب الزوار من أي صفحة — وترى الصفحة والقسم الذي كانوا يقرؤونه."
+
+#: templates/panel/chats.html:8
+msgid "Conversation list"
+msgstr "قائمة المحادثات"
+
+#: templates/panel/chats.html:11
+msgid "To the doctor"
+msgstr "إلى الطبيبة"
+
+#: templates/panel/chats.html:12
+msgid "To the secretary"
+msgstr "إلى السكرتيرة"
+
+#: templates/panel/chats.html:21 templates/panel/dashboard.html:63
+msgid "Unread"
+msgstr "غير مقروءة"
+
+#: templates/panel/chats.html:31
+msgid "No conversations here yet."
+msgstr "لا توجد محادثات بعد."
+
+#: templates/panel/chats.html:39
+msgid "Back to list"
+msgstr "العودة إلى القائمة"
+
+#: templates/panel/chats.html:42
+msgid "To"
+msgstr "إلى"
+
+#: templates/panel/chats.html:45
+msgid "Close conversation"
+msgstr "إغلاق المحادثة"
+
+#: templates/panel/chats.html:45
+msgid "Reopen"
+msgstr "إعادة الفتح"
+
+#: templates/panel/chats.html:50
+msgid "Visitor is on"
+msgstr "الزائر في صفحة"
+
+#: templates/panel/chats.html:53 templates/panel/chats.html:56
+msgid "was reading"
+msgstr "كان يقرأ"
+
+#: templates/panel/chats.html:63
+msgid "Reply"
+msgstr "الرد"
+
+#: templates/panel/chats.html:64
+msgid "Write a reply…"
+msgstr "اكتب ردك…"
+
+#: templates/panel/chats.html:65 templates/partials/chat_widget.html:65
+msgid "Send"
+msgstr "إرسال"
+
+#: templates/panel/chats.html:68
+msgid "Choose a conversation from the list."
+msgstr "اختر محادثة من القائمة."
+
+#: templates/panel/dashboard.html:4
+#, python-format
+msgid "Hello, %(name)s"
+msgstr "مرحباً %(name)s"
+
+#: templates/panel/dashboard.html:7
+msgid "Summary"
+msgstr "ملخص"
+
+#: templates/panel/dashboard.html:8
+msgid "Appointments today"
+msgstr "مواعيد اليوم"
+
+#: templates/panel/dashboard.html:9 templates/panel/dashboard.html:17
+msgid "Waiting for a call"
+msgstr "بانتظار الاتصال"
+
+#: templates/panel/dashboard.html:11
+msgid "Unread conversations"
+msgstr "محادثات غير مقروءة"
+
+#: templates/panel/dashboard.html:18 templates/panel/dashboard.html:38
+msgid "See all"
+msgstr "عرض الكل"
+
+#: templates/panel/dashboard.html:32
+msgid "Nobody is waiting. Nice work."
+msgstr "لا أحد ينتظر. عمل رائع."
+
+#: templates/panel/dashboard.html:37
+msgid "Upcoming appointments"
+msgstr "المواعيد القادمة"
+
+#: templates/panel/dashboard.html:50
+msgid "No upcoming appointments yet."
+msgstr "لا مواعيد قادمة بعد."
+
+#: templates/panel/dashboard.html:55
+msgid "Open conversations"
+msgstr "المحادثات المفتوحة"
+
+#: templates/panel/dashboard.html:56
+msgid "Inbox"
+msgstr "صندوق الوارد"
+
+#: templates/panel/dashboard.html:70
+msgid "No open conversations."
+msgstr "لا توجد محادثات مفتوحة."
+
+#: templates/panel/dashboard.html:74
+msgid "Most requested (30 days)"
+msgstr "الأكثر طلباً (30 يوماً)"
+
+#: templates/panel/dashboard.html:87
+msgid "Requests will show up here."
+msgstr "ستظهر الطلبات هنا."
+
+#: templates/panel/login.html:7 templates/panel/login.html:31
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+#: templates/panel/login.html:18
+msgid ""
+"For the doctor and the secretary: appointments, conversations and "
+"notifications."
+msgstr "للطبيبة والسكرتيرة: المواعيد والمحادثات والإشعارات."
+
+#: templates/panel/settings.html:10
+msgid "Add channel"
+msgstr "إضافة قناة"
+
+#: templates/panel/settings.html:12
+msgid ""
+"New appointments and chat messages are sent to every active channel. "
+"Telegram and Bale can also reply and confirm appointments."
+msgstr ""
+"تُرسل المواعيد الجديدة ورسائل المحادثة إلى كل القنوات المفعّلة. ويمكن في "
+"تيليجرام وبله الرد وتأكيد المواعيد."
+
+#: templates/panel/settings.html:18
+#, python-format
+msgid "%(ok)s sent, %(bad)s failed"
+msgstr "%(ok)s ناجحة، %(bad)s فاشلة"
+
+#: templates/panel/settings.html:19
+msgid "Off"
+msgstr "متوقفة"
+
+#: templates/panel/settings.html:24
+msgid "No channels yet. Add a Telegram bot to get appointments on your phone."
+msgstr "لا توجد قنوات بعد. أضف بوت تيليجرام لتصلك المواعيد على هاتفك."
+
+#: templates/panel/settings.html:28
+msgid "How to connect a Telegram bot (3 minutes)"
+msgstr "طريقة ربط بوت تيليجرام (3 دقائق)"
+
+#: templates/panel/settings.html:30
+msgid ""
+"In Telegram, open @BotFather, send /newbot and copy the token it gives you."
+msgstr "افتح ‎@BotFather‎ في تيليجرام وأرسل ‎/newbot‎ وانسخ الرمز."
+
+#: templates/panel/settings.html:31
+msgid ""
+"Create a private group for the doctor and secretary and add the bot to it."
+msgstr "أنشئ مجموعة خاصة للطبيبة والسكرتيرة وأضف البوت إليها."
+
+#: templates/panel/settings.html:32
+msgid "Add a channel here with type “Telegram bot” and paste the token. Save."
+msgstr "أضف قناة هنا بنوع «بوت تيليجرام» والصق الرمز ثم احفظ."
+
+#: templates/panel/settings.html:33
+msgid ""
+"Press “Connect bot”, then send /id in the group. Paste the number it replies"
+" with into “Recipient” and save."
+msgstr ""
+"اضغط «ربط البوت» ثم أرسل ‎/id‎ في المجموعة. الصق الرقم الذي يرد به في "
+"«المستلم» واحفظ."
+
+#: templates/panel/settings.html:34
+msgid ""
+"Press “Send test message”. From now on you can reply to chats and confirm "
+"appointments inside Telegram."
+msgstr ""
+"اضغط «إرسال رسالة اختبار». من الآن يمكنك الرد وتأكيد المواعيد داخل تيليجرام."
+
+#: templates/panel/settings.html:40
+msgid "Booking rules and contact"
+msgstr "قواعد الحجز ومعلومات الاتصال"
+
+#: templates/partials/ba_slider.html:13
+msgid "Drag the line to compare"
+msgstr "اسحب الخط للمقارنة"
+
+#: templates/partials/booking_dialog.html:8
+#: templates/partials/chat_widget.html:17
+msgid "Close"
+msgstr "إغلاق"
+
+#: templates/partials/booking_form.html:66
+msgid "Add a note (optional)"
+msgstr "إضافة ملاحظة (اختياري)"
+
+#: templates/partials/booking_form.html:69
+msgid "e.g. I have had nose surgery before"
+msgstr "مثلاً: أجريت جراحة أنف سابقاً"
+
+#: templates/partials/booking_form.html:74
+msgid "Request appointment"
+msgstr "إرسال طلب الموعد"
+
+#: templates/partials/booking_form.html:76
+msgid ""
+"The secretary calls you to confirm. Your details are only used to arrange "
+"this visit."
+msgstr "ستتصل بك السكرتيرة للتأكيد. تُستخدم بياناتك لترتيب هذا الموعد فقط."
+
+#: templates/partials/booking_form.html:84
+msgid "Book another visit"
+msgstr "حجز موعد آخر"
+
+#: templates/partials/chat_widget.html:4
+#: templates/partials/chat_widget.html:13
+msgid "Chat with the clinic"
+msgstr "تحدّث مع العيادة"
+
+#: templates/partials/chat_widget.html:14
+msgid "Usually replies within an hour"
+msgstr "نرد عادةً خلال ساعة"
+
+#: templates/partials/chat_widget.html:22
+msgid "Sent with your message"
+msgstr "يُرسل مع رسالتك"
+
+#: templates/partials/chat_widget.html:28
+msgid "Who would you like to talk to?"
+msgstr "مع من تودّ التحدث؟"
+
+#: templates/partials/chat_widget.html:31
+msgid "Booking, costs, follow-up"
+msgstr "الحجز والتكلفة والمتابعة"
+
+#: templates/partials/chat_widget.html:35
+msgid "Medical questions about a treatment"
+msgstr "أسئلة طبية عن العلاج"
+
+#: templates/partials/chat_widget.html:40
+msgid "Your name"
+msgstr "اسمك"
+
+#: templates/partials/chat_widget.html:45
+msgid "Mobile (optional)"
+msgstr "الجوال (اختياري)"
+
+#: templates/partials/chat_widget.html:51
+msgid "Your question"
+msgstr "سؤالك"
+
+#: templates/partials/chat_widget.html:56
+msgid "Send message"
+msgstr "إرسال الرسالة"
+
+#: templates/partials/chat_widget.html:63
+msgid "Message"
+msgstr "الرسالة"
+
+#: templates/partials/chat_widget.html:64
+msgid "Write a message…"
+msgstr "اكتب رسالة…"
+
+#: templates/partials/chat_widget.html:67
+msgid "Start a new conversation"
+msgstr "بدء محادثة جديدة"
+
+#: templates/partials/footer.html:26 templates/partials/header.html:30
+#: templates/partials/header.html:76 templates/procedures/detail.html:35
+#: templates/procedures/detail.html:53
+msgid "Before & after"
+msgstr "قبل وبعد"
+
+#: templates/partials/footer.html:27 templates/partials/header.html:31
+#: templates/partials/header.html:77
+msgid "The doctor"
+msgstr "الطبيبة"
+
+#: templates/partials/footer.html:33 templates/partials/header.html:33
+#: templates/partials/header.html:79
+msgid "Contact"
+msgstr "اتصل بنا"
+
+#: templates/partials/footer.html:43
+msgid ""
+"Results differ from person to person. Photos are published with patients' "
+"written consent."
+msgstr "تختلف النتائج من شخص لآخر. تُنشر الصور بموافقة المرضى الخطية."
+
+#: templates/partials/footer.html:44
+msgid ""
+"Demo version: the doctor profile, patient stories and before/after images "
+"are samples."
+msgstr "نسخة تجريبية: بيانات الطبيب وآراء المرضى وصور قبل وبعد هي نماذج."
+
+#: templates/partials/header.html:9 templates/partials/header.html:68
+msgid "Main menu"
+msgstr "القائمة الرئيسية"
+
+#: templates/partials/header.html:27
+msgid "See all treatments"
+msgstr "عرض جميع العلاجات"
+
+#: templates/partials/header.html:39
+msgid "Change language"
+msgstr "تغيير اللغة"
+
+#: templates/partials/header.html:61
+msgid "Open menu"
+msgstr "فتح القائمة"
+
+#: templates/procedures/detail.html:10
+msgid "Breadcrumb"
+msgstr "مسار التنقل"
+
+#: templates/procedures/detail.html:19
+msgid "Non-surgical"
+msgstr "غير جراحي"
+
+#: templates/procedures/detail.html:26
+msgid "Result lasts"
+msgstr "مدة النتيجة"
+
+#: templates/procedures/detail.html:32
+msgid "On this page"
+msgstr "في هذه الصفحة"
+
+#: templates/procedures/detail.html:33
+msgid "Overview"
+msgstr "نظرة عامة"
+
+#: templates/procedures/detail.html:40
+#, python-format
+msgid "What is %(name)s?"
+msgstr "ما هو %(name)s؟"
+
+#: templates/procedures/detail.html:62
+msgid "Common questions"
+msgstr "أسئلة شائعة"
+
+#: templates/procedures/detail.html:77
+#, python-format
+msgid "Book a consultation for %(name)s"
+msgstr "احجز استشارة %(name)s"
+
+#: templates/procedures/detail.html:83
+msgid "Have a question first?"
+msgstr "لديك سؤال أولاً؟"
+
+#: templates/procedures/detail.html:83
+msgid "The doctor sees which page you are reading."
+msgstr "ترى الطبيبة الصفحة التي تقرؤها."
+
+#: templates/procedures/detail.html:91
+msgid "Related treatments"
+msgstr "علاجات ذات صلة"
+
+#: templates/procedures/detail.html:107
+msgid "Consultation booking"
+msgstr "حجز استشارة"
+
+#: templates/procedures/list.html:7
+msgid ""
+"Surgical and non-surgical options. Each page covers candidates, steps, "
+"recovery and risks, with a booking form beside it."
+msgstr ""
+"خيارات جراحية وغير جراحية. تشرح كل صفحة المرشحين والخطوات والتعافي والمخاطر "
+"مع نموذج حجز بجانبها."
+
+#: templates/procedures/results.html:18
+msgid "Photos will be added soon."
+msgstr "ستُضاف الصور قريباً."
+
+#~ msgid "Board-certified plastic surgeon"
+#~ msgstr "جرّاح تجميل حاصل على البورد"
+
+#~ msgid "Surgery in accredited hospitals"
+#~ msgstr "الجراحة في مستشفيات معتمدة"
+
+#~ msgid "Written treatment plan before surgery"
+#~ msgstr "خطة علاج مكتوبة قبل العملية"
+
+#~ msgid "Follow-up for twelve months"
+#~ msgstr "متابعة لمدة اثني عشر شهراً"

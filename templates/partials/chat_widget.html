@@ -1,0 +1,70 @@
+{% load i18n %}
+<div class="chat" data-chat>
+  <button class="chat__fab" type="button" aria-expanded="false" aria-controls="chat-panel" data-chat-toggle>
+    {% icon "chat" %}<span class="chat__fab-label">{% translate "Chat with the clinic" %}</span>
+    <span class="chat__badge" hidden data-chat-badge></span>
+  </button>
+
+  <section class="chat__panel" id="chat-panel" role="dialog" aria-modal="false" aria-labelledby="chat-title" hidden data-chat-panel>
+    <header class="chat__head">
+      <div class="chat__who">
+        <span class="chat__avatar">{% icon "logo" %}</span>
+        <div>
+          <h2 class="chat__title" id="chat-title">{% translate "Chat with the clinic" %}</h2>
+          <p class="chat__status"><span class="dot"></span>{% translate "Usually replies within an hour" %}</p>
+        </div>
+      </div>
+      <button class="icon-btn icon-btn--on-dark" type="button" data-chat-close aria-label="{% translate 'Close' %}">{% icon "close" %}</button>
+    </header>
+
+    <div class="chat__context" data-chat-context>
+      {% icon "file" %}
+      <p><span>{% translate "Sent with your message" %}:</span> <b data-chat-context-text></b></p>
+    </div>
+
+    {# Step 1 — start a conversation #}
+    <form class="chat__start" data-chat-start novalidate>
+      <fieldset class="chat__to">
+        <legend>{% translate "Who would you like to talk to?" %}</legend>
+        <label class="chat__to-opt">
+          <input type="radio" name="recipient" value="secretary" checked>
+          <span>{% icon "headset" %}<b>{% translate "Secretary" %}</b><small>{% translate "Booking, costs, follow-up" %}</small></span>
+        </label>
+        <label class="chat__to-opt">
+          <input type="radio" name="recipient" value="doctor">
+          <span>{% icon "steth" %}<b>{% translate "Doctor" %}</b><small>{% translate "Medical questions about a treatment" %}</small></span>
+        </label>
+      </fieldset>
+      <div class="field-row">
+        <div class="field">
+          <label class="field__label" for="chat-name">{% translate "Your name" %}</label>
+          <input class="input" id="chat-name" name="name" autocomplete="name" maxlength="120" required>
+          <p class="field__error" data-error-for="name"></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="chat-phone">{% translate "Mobile (optional)" %}</label>
+          <input class="input input--ltr" id="chat-phone" name="phone" type="tel" inputmode="tel" dir="ltr" maxlength="20" autocomplete="tel">
+          <p class="field__error" data-error-for="phone"></p>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="chat-body">{% translate "Your question" %}</label>
+        <textarea class="input" id="chat-body" name="body" rows="3" maxlength="2000" required></textarea>
+        <p class="field__error" data-error-for="body"></p>
+      </div>
+      <p class="bform__error" role="alert" data-chat-error></p>
+      <button class="btn btn--navy btn--block" type="submit">{% icon "send" "flip-rtl" %} {% translate "Send message" %}</button>
+    </form>
+
+    {# Step 2 — the conversation #}
+    <div class="chat__thread" hidden data-chat-thread>
+      <ol class="chat__log" aria-live="polite" data-chat-log></ol>
+      <form class="chat__compose" data-chat-compose>
+        <label class="sr-only" for="chat-input">{% translate "Message" %}</label>
+        <textarea class="input" id="chat-input" name="body" rows="1" maxlength="2000" placeholder="{% translate 'Write a message…' %}" required></textarea>
+        <button class="icon-btn icon-btn--navy" type="submit" aria-label="{% translate 'Send' %}">{% icon "send" "flip-rtl" %}</button>
+      </form>
+      <button class="chat__new" type="button" data-chat-reset>{% translate "Start a new conversation" %}</button>
+    </div>
+  </section>
+</div>

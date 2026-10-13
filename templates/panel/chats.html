@@ -1,0 +1,72 @@
+{% extends "panel/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Conversations" %}{% endblock %}
+{% block heading %}{% translate "Conversations" %}{% endblock %}
+{% block subheading %}<p class="pn-muted">{% translate "Visitors write from any page — you see which page and section they were reading." %}</p>{% endblock %}
+{% block content %}
+<div class="inbox{% if thread %} has-thread{% endif %}">
+  <section class="inbox__list pn-card pn-card--flush" aria-label="{% translate 'Conversation list' %}">
+    <nav class="inbox__tabs" aria-label="{% translate 'Filter' %}">
+      <a class="tab" href="{% url 'panel:chats' %}" {% if not box and request.GET.status != 'closed' %}aria-selected="true"{% endif %}>{% translate "All" %}</a>
+      <a class="tab" href="?box=doctor" {% if box == 'doctor' %}aria-selected="true"{% endif %}>{% translate "To the doctor" %}</a>
+      <a class="tab" href="?box=secretary" {% if box == 'secretary' %}aria-selected="true"{% endif %}>{% translate "To the secretary" %}</a>
+      <a class="tab" href="?status=closed" {% if request.GET.status == 'closed' %}aria-selected="true"{% endif %}>{% translate "Closed" %}</a>
+    </nav>
+    <ul class="inbox__items">
+      {% for t in threads %}
+      <li>
+        <a class="inbox__item{% if thread and thread.pk == t.pk %} is-active{% endif %}" href="{{ t.get_panel_url }}{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}">
+          <span class="pn-user__avatar">{{ t.visitor_name|slice:":1" }}</span>
+          <span class="inbox__meta">
+            <b>{{ t.visitor_name }}{% if t.unread_for_staff %} <i class="dot-new" aria-label="{% translate 'Unread' %}"></i>{% endif %}</b>
+            <small>{% icon "file" %} {{ t.page_context.title|default:"—"|truncatechars:42 }}</small>
+          </span>
+          <span class="inbox__side">
+            <small>{{ t.last_message_at|time:"H:i"|ldigits }}</small>
+            <span class="pill pill--{% if t.recipient == 'doctor' %}info{% else %}muted{% endif %}">{{ t.get_recipient_display }}</span>
+          </span>
+        </a>
+      </li>
+      {% empty %}
+      <li class="pn-empty">{% translate "No conversations here yet." %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="inbox__thread pn-card pn-card--flush" aria-label="{% translate 'Conversation' %}">
+    {% if thread %}
+    <header class="thread__head">
+      <a class="icon-btn inbox__back" href="{% url 'panel:chats' %}" aria-label="{% translate 'Back to list' %}">{% icon "chev" "flip-rtl-back" %}</a>
+      <div class="thread__who">
+        <b>{{ thread.visitor_name }}</b>
+        <small>{% if thread.visitor_phone %}<a href="tel:{{ thread.visitor_phone }}" dir="ltr">{{ thread.visitor_phone|ldigits }}</a> · {% endif %}{% translate "To" %} {{ thread.get_recipient_display }} · {{ LANG_META|get_item:thread.language|get_item:"native" }}</small>
+      </div>
+      <form method="post" action="{% url 'panel:chat_toggle' thread.pk %}">{% csrf_token %}
+        <button class="btn btn--line btn--sm" type="submit">{% if thread.status == "open" %}{% icon "check" %} {% translate "Close conversation" %}{% else %}{% translate "Reopen" %}{% endif %}</button>
+      </form>
+    </header>
+    <div class="thread__ctx" data-thread-ctx>
+      {% icon "file" %}
+      <p>{% translate "Visitor is on" %}: <a class="link" href="{{ thread.page_context.url|default:'#' }}" target="_blank" rel="noopener" data-ctx-link><span data-ctx-title>{{ thread.page_context.title|default:"—" }}</span></a>
+        <span data-ctx-section>{% if thread.page_context.section %} · {% translate "Section" %}: {{ thread.page_context.section }}{% endif %}</span></p>
+    </div>
+    <ol class="thread__log" aria-live="polite" data-thread-log data-api="{% url 'panel:chat_api' thread.pk %}" data-section-label="{% translate 'Section' %}" data-seen-label="{% translate 'was reading' %}">
+      {% for m in messages_list %}
+      {% ifchanged m.page_context.url m.page_context.section %}{% if m.sender == "visitor" and m.page_context.title %}
+      <li class="thread__marker">{% icon "file" %} {% translate "was reading" %}: {{ m.page_context.title }}{% if m.page_context.section %} · {{ m.page_context.section }}{% endif %}</li>
+      {% endif %}{% endifchanged %}
+      <li class="msg msg--{% if m.sender == 'visitor' %}in{% else %}out{% endif %}" data-id="{{ m.pk }}">{% if m.sender != "visitor" %}<span class="msg__name">{{ m.staff_name|default:"—" }}{% if m.via != "web" %} · {{ m.get_via_display }}{% endif %}</span>{% endif %}<span class="msg__body">{{ m.body }}</span><span class="msg__time">{{ m.created_at|time:"H:i"|ldigits }}</span></li>
+      {% endfor %}
+    </ol>
+    <form class="chat__compose" method="post" action="{% url 'panel:chat_api' thread.pk %}" data-thread-compose>
+      {% csrf_token %}
+      <label class="sr-only" for="reply">{% translate "Reply" %}</label>
+      <textarea class="input" id="reply" name="body" rows="1" maxlength="2000" placeholder="{% translate 'Write a reply…' %}" required></textarea>
+      <button class="icon-btn icon-btn--navy" type="submit" aria-label="{% translate 'Send' %}">{% icon "send" "flip-rtl" %}</button>
+    </form>
+    {% else %}
+    <div class="pn-empty pn-empty--big">{% icon "chat" %}<p>{% translate "Choose a conversation from the list." %}</p></div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

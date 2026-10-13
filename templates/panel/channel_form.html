@@ -1,0 +1,66 @@
+{% extends "panel/base.html" %}
+{% load i18n %}
+{% block title %}{% if channel %}{{ channel.name }}{% else %}{% translate "New channel" %}{% endif %}{% endblock %}
+{% block heading %}{% if channel %}{{ channel.name }}{% else %}{% translate "New channel" %}{% endif %}{% endblock %}
+{% block subheading %}<p class="pn-muted"><a class="link" href="{% url 'panel:settings' %}">{% icon "arrow" "flip-rtl-back" %} {% translate "Settings" %}</a></p>{% endblock %}
+{% block content %}
+<div class="pn-split">
+  <section class="pn-card">
+    <form method="post" novalidate data-channel-form>
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="field{% if field.name == 'is_active' or field.name == 'allow_replies' %} field--check{% endif %}" data-field="{{ field.name }}">
+        {% if field.name == "is_active" or field.name == "allow_replies" %}
+          <label class="check">{{ field }} <span>{{ field.label }}</span></label>
+        {% elif field.name == "events" %}
+          <fieldset class="checks"><legend class="field__label">{{ field.label }}</legend>{% for cb in field %}<label class="check">{{ cb.tag }} <span>{{ cb.choice_label }}</span></label>{% endfor %}</fieldset>
+        {% else %}
+          <label class="field__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {% if field.name == "kind" %}<div class="select">{{ field }}{% icon "chev-down" "select__chev" %}</div>{% else %}{{ field }}{% endif %}
+        {% endif %}
+        {% if field.help_text %}<p class="pn-help">{{ field.help_text }}</p>{% endif %}
+        <p class="field__error">{{ field.errors|join:" " }}</p>
+      </div>
+      {% endfor %}
+      <div class="pn-actions">
+        <button class="btn btn--navy" type="submit">{% icon "check" %} {% translate "Save" %}</button>
+      </div>
+    </form>
+    {% if channel %}
+    <form method="post" action="{% url 'panel:channel_delete' channel.pk %}" class="pn-danger">{% csrf_token %}
+      <button class="btn btn--line btn--sm" type="submit">{% translate "Delete channel" %}</button>
+    </form>
+    {% endif %}
+  </section>
+
+  {% if channel %}
+  <section class="pn-card">
+    <header class="pn-card__head"><h2>{% translate "Test and connect" %}</h2></header>
+    <form method="post" action="{% url 'panel:channel_test' channel.pk %}">{% csrf_token %}
+      <button class="btn btn--navy" type="submit">{% icon "send" "flip-rtl" %} {% translate "Send test message" %}</button>
+    </form>
+    {% if channel.supports_replies %}
+    <div class="pn-webhook">
+      <p class="field__label">{% translate "Bot webhook address" %}</p>
+      <code dir="ltr">{{ webhook_url }}</code>
+      <p class="pn-help">{% translate "Needed for replies and confirm buttons. Your site must be reachable over https." %}</p>
+      <div class="pn-actions">
+        <form method="post" action="{% url 'panel:channel_webhook' channel.pk %}">{% csrf_token %}<button class="btn btn--line btn--sm" type="submit">{% translate "Connect bot" %}</button></form>
+        <form method="post" action="{% url 'panel:channel_webhook' channel.pk %}">{% csrf_token %}<input type="hidden" name="action" value="delete"><button class="btn btn--line btn--sm" type="submit">{% translate "Disconnect" %}</button></form>
+      </div>
+    </div>
+    {% endif %}
+    <h3 class="pn-h3">{% translate "Recent deliveries" %}</h3>
+    {% if logs %}
+    <ul class="pn-log">
+      {% for l in logs %}
+      <li><span class="pill pill--{% if l.ok %}ok{% else %}danger{% endif %}">{% if l.ok %}{% translate "Sent" %}{% else %}{% translate "Failed" %}{% endif %}</span>
+        <span>{{ l.get_event_display }}</span><small>{{ l.created_at|jdate:"short" }} {{ l.created_at|time:"H:i"|ldigits }}</small>
+        {% if not l.ok %}<code dir="ltr">{{ l.detail|truncatechars:160 }}</code>{% endif %}</li>
+      {% endfor %}
+    </ul>
+    {% else %}<p class="pn-empty">{% translate "Nothing sent yet." %}</p>{% endif %}
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

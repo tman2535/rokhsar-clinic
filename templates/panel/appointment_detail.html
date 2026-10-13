@@ -1,0 +1,58 @@
+{% extends "panel/base.html" %}
+{% load i18n %}
+{% block title %}{{ a.full_name }}{% endblock %}
+{% block heading %}{{ a.full_name }}{% endblock %}
+{% block subheading %}<p class="pn-muted"><a class="link" href="{% url 'panel:appointments' %}">{% icon "arrow" "flip-rtl-back" %} {% translate "All appointments" %}</a> · <span dir="ltr">{{ a.code }}</span></p>{% endblock %}
+{% block content %}
+<div class="pn-split">
+  <section class="pn-card" aria-labelledby="info-h">
+    <header class="pn-card__head"><h2 id="info-h">{% translate "Request" %}</h2>{% include "panel/includes/status.html" %}</header>
+    <dl class="pn-dl">
+      <div><dt>{% translate "Mobile number" %}</dt><dd>
+        <a class="pn-strong" href="tel:{{ a.phone }}" dir="ltr">{{ a.phone|ldigits }}</a>
+        <span class="pn-actions">
+          <a class="btn btn--navy btn--sm" href="tel:{{ a.phone }}">{% icon "phone" %} {% translate "Call" %}</a>
+          <a class="btn btn--line btn--sm" href="https://wa.me/{{ a.phone|cut:'+' }}" target="_blank" rel="noopener">{% icon "whatsapp" %} WhatsApp</a>
+        </span>
+      </dd></div>
+      <div><dt>{% translate "Treatment" %}</dt><dd>{% if a.procedure %}<a class="link" href="{{ a.procedure.get_absolute_url }}" target="_blank" rel="noopener">{{ a.procedure|tr:"title" }}</a>{% else %}—{% endif %}</dd></div>
+      <div><dt>{% translate "Preferred day" %}</dt><dd><b>{{ a.preferred_date|jdate }}</b> · {% translate "Time" %} {{ a.time_slot|ldigits }}<span class="pn-sub" dir="ltr">{{ a.preferred_date|date:"Y-m-d" }}</span></dd></div>
+      <div><dt>{% translate "Booked from page" %}</dt><dd>{% if a.source_url %}<a class="link" href="{{ a.source_url }}" target="_blank" rel="noopener">{{ a.source_title|default:a.source_url }}</a>{% else %}—{% endif %}</dd></div>
+      <div><dt>{% translate "Note" %}</dt><dd>{{ a.note|default:"—"|linebreaksbr }}</dd></div>
+      <div><dt>{% translate "Received" %}</dt><dd>{{ a.created_at|jdate }} · {{ a.created_at|time:"H:i"|ldigits }} · {{ LANG_META|get_item:a.language|get_item:"native" }}</dd></div>
+      {% if a.handled_by %}<div><dt>{% translate "Handled by" %}</dt><dd>{{ a.handled_by.get_full_name|default:a.handled_by.username }}</dd></div>{% endif %}
+    </dl>
+  </section>
+
+  <section class="pn-card" aria-labelledby="edit-h">
+    <header class="pn-card__head"><h2 id="edit-h">{% translate "Update" %}</h2></header>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="field">
+        <label class="field__label" for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
+        <div class="select">{{ form.status }}{% icon "chev-down" "select__chev" %}</div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label class="field__label" for="{{ form.preferred_date.id_for_label }}">{{ form.preferred_date.label }}</label>{{ form.preferred_date }}<p class="field__error">{{ form.preferred_date.errors|join:" " }}</p></div>
+        <div class="field"><label class="field__label" for="{{ form.time_slot.id_for_label }}">{{ form.time_slot.label }}</label>{{ form.time_slot }}<p class="field__error">{{ form.time_slot.errors|join:" " }}</p></div>
+      </div>
+      <div class="field"><label class="field__label" for="{{ form.staff_note.id_for_label }}">{{ form.staff_note.label }}</label>{{ form.staff_note }}</div>
+      <button class="btn btn--navy" type="submit">{% icon "check" %} {% translate "Save" %}</button>
+    </form>
+  </section>
+
+  {% if others or threads %}
+  <section class="pn-card" aria-labelledby="hist-h">
+    <header class="pn-card__head"><h2 id="hist-h">{% translate "History with this number" %}</h2></header>
+    <ul class="pn-list">
+      {% for o in others %}
+      <li class="pn-row"><a class="pn-row__main" href="{{ o.get_panel_url }}"><b>{{ o.procedure|tr:"title"|default:"—" }}</b><span>{{ o.preferred_date|jdate }}</span></a>{% include "panel/includes/status.html" with a=o %}</li>
+      {% endfor %}
+      {% for t in threads %}
+      <li class="pn-row"><a class="pn-row__main" href="{{ t.get_panel_url }}"><b>{% icon "chat" %} {% translate "Conversation" %} #{{ t.pk|ldigits }}</b><span>{{ t.page_context.title }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

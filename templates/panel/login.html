@@ -1,0 +1,35 @@
+{% load static i18n %}<!doctype html>
+<html lang="{{ LANG }}" dir="{{ DIR }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% translate "Sign in" %} — {{ clinic|tr:"clinic_name" }}</title>
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <link rel="stylesheet" href="{% static 'css/panel.css' %}">
+  <script>(function(){var t=null;try{t=localStorage.getItem("rk-theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t})();</script>
+</head>
+<body class="panel pn-login">
+  {% include "partials/sprite.html" %}
+  <main class="pn-login__card">
+    <div class="brand pn-login__brand">{% icon "logo" "brand__mark" %}<span class="brand__name">{{ clinic|tr:"clinic_name" }}</span></div>
+    <h1>{% translate "Clinic panel" %}</h1>
+    <p class="pn-muted">{% translate "For the doctor and the secretary: appointments, conversations and notifications." %}</p>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      {% if form.non_field_errors %}<p class="bform__error" role="alert">{% for e in form.non_field_errors %}{{ e }}{% endfor %}</p>{% endif %}
+      <div class="field">
+        <label class="field__label" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+        <input class="input input--ltr" type="text" name="username" id="{{ form.username.id_for_label }}" value="{{ form.username.value|default:'' }}" autocomplete="username" autofocus required>
+      </div>
+      <div class="field">
+        <label class="field__label" for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+        <input class="input input--ltr" type="password" name="password" id="{{ form.password.id_for_label }}" autocomplete="current-password" required>
+      </div>
+      <button class="btn btn--navy btn--block" type="submit">{% translate "Sign in" %}</button>
+    </form>
+  </main>
+</body>
+</html>

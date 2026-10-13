@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ procedure|tr:"title" }} — {{ clinic|tr:"clinic_name" }}{% endblock %}
+{% block description %}{% with md=procedure|tr:"meta_description" %}{% if md %}{{ md }}{% else %}{{ procedure|tr:"summary" }}{% endif %}{% endwith %}{% endblock %}
+{% block og_title %}{{ procedure|tr:"title" }}{% endblock %}
+{% block body_class %}page-procedure{% endblock %}
+
+{% block content %}
+<nav class="container crumbs" aria-label="{% translate 'Breadcrumb' %}">
+  <ol>
+    <li><a href="{% url 'core:home' %}">{% translate "Home" %}</a></li>
+    <li><a href="{% url 'procedures:list' %}">{% translate "Treatments" %}</a></li>
+    <li aria-current="page">{{ procedure|tr:"title" }}</li>
+  </ol>
+</nav>
+
+<header class="container p-hero">
+  <span class="chip p-hero__chip">{% icon procedure.category.icon %} {{ procedure.category|tr:"name" }} · {% if procedure.is_surgical %}{% translate "Surgical" %}{% else %}{% translate "Non-surgical" %}{% endif %}</span>
+  <h1 class="p-hero__title">{{ procedure|tr:"title" }}</h1>
+  <p class="p-hero__sum">{{ procedure|tr:"summary" }}</p>
+  <dl class="facts">
+    <div><dt>{% icon "clock" %} {% translate "Duration" %}</dt><dd>{{ procedure|tr:"duration" }}</dd></div>
+    <div><dt>{% icon "shield" %} {% translate "Anesthesia" %}</dt><dd>{{ procedure|tr:"anesthesia" }}</dd></div>
+    <div><dt>{% icon "heart" %} {% translate "Back to routine" %}</dt><dd>{{ procedure|tr:"recovery" }}</dd></div>
+    <div><dt>{% icon "sparkle" %} {% translate "Result lasts" %}</dt><dd>{{ procedure|tr:"longevity" }}</dd></div>
+  </dl>
+</header>
+
+<div class="container p-body">
+  <article class="p-main">
+    <nav class="toc" aria-label="{% translate 'On this page' %}">
+      <a href="#overview">{% translate "Overview" %}</a>
+      {% for s in sections %}<a href="#{{ s.key }}">{{ s.get_key_display }}</a>{% endfor %}
+      {% if cases %}<a href="#cases">{% translate "Before & after" %}</a>{% endif %}
+      {% if faqs %}<a href="#questions-faq">{% translate "Questions" %}</a>{% endif %}
+    </nav>
+
+    <section class="p-section" id="overview" aria-labelledby="overview-h">
+      <h2 id="overview-h">{% blocktranslate with name=procedure|tr:"title" %}What is {{ name }}?{% endblocktranslate %}</h2>
+      <div class="prose p-intro">{{ procedure|tr:"intro"|rich }}</div>
+    </section>
+
+    {% for s in sections %}
+    <section class="p-section" id="{{ s.key }}" aria-labelledby="{{ s.key }}-h">
+      <h2 id="{{ s.key }}-h">{{ s.get_key_display }}</h2>
+      <div class="prose">{{ s|tr:"body"|rich }}</div>
+    </section>
+    {% endfor %}
+
+    {% if cases %}
+    <section class="p-section" id="cases" aria-labelledby="cases-h">
+      <h2 id="cases-h">{% translate "Before & after" %}</h2>
+      <div class="ba-grid">
+        {% for case in cases %}{% include "partials/ba_slider.html" with case=case %}{% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if faqs %}
+    <section class="p-section" id="questions-faq" aria-labelledby="faq-h">
+      <h2 id="faq-h">{% translate "Common questions" %}</h2>
+      <div class="faq">
+        {% for f in faqs %}
+        <details class="faq__item">
+          <summary>{{ f|tr:"question" }}{% icon "plus" "faq__ic" %}</summary>
+          <div class="faq__a">{{ f|tr:"answer"|rich }}</div>
+        </details>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </article>
+
+  <aside class="p-aside" id="book" aria-labelledby="aside-title">
+    <div class="p-aside__card">
+      <h2 class="p-aside__title" id="aside-title">{% blocktranslate with name=procedure|tr:"title" %}Book a consultation for {{ name }}{% endblocktranslate %}</h2>
+      <p class="p-aside__sub">{% translate "Takes under a minute. No payment needed." %}</p>
+      {% include "partials/booking_form.html" with fid="aside" tone="light" selected=procedure %}
+    </div>
+    <button class="p-aside__chat" type="button" data-open-chat="doctor">
+      {% icon "steth" %}
+      <span><b>{% translate "Have a question first?" %}</b><small>{% translate "The doctor sees which page you are reading." %}</small></span>
+    </button>
+  </aside>
+</div>
+
+{% if related %}
+<section class="section--mist p-block" aria-labelledby="related-h">
+  <div class="container">
+    <h2 class="section__title" id="related-h">{% translate "Related treatments" %}</h2>
+    <ul class="cards related">
+      {% for p in related %}
+      <li class="card">
+        <span class="card__icon">{% icon p.icon %}</span>
+        <h3 class="card__title"><a href="{{ p.get_absolute_url }}">{{ p|tr:"title" }}</a></h3>
+        <p class="card__text">{{ p|tr:"summary" }}</p>
+        <div class="card__actions"><span class="link">{% translate "Learn more" %} {% icon "arrow" "flip-rtl" %}</span></div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+<div class="mobile-book" data-mobile-book>
+  <p><b>{{ procedure|tr:"title" }}</b>{% translate "Consultation booking" %}</p>
+  <a class="btn btn--gold btn--sm" href="#book">{% icon "calendar" %} {% translate "Book a visit" %}</a>
+</div>
+{% endblock %}

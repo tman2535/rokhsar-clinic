@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Your request is in" %}{% endblock %}
+{% block content %}
+<div class="empty">
+  {% icon "check-circle" "bform__done-icon" %}
+  <h1>{% translate "Your request is in" %}</h1>
+  <p>{% if appointment.procedure %}{{ appointment.procedure|tr:"title" }} · {% endif %}{{ appointment.preferred_date|jdate }} · {{ appointment.time_slot|ldigits }}</p>
+  <p>{% translate "Tracking code" %}: <b dir="ltr">{{ appointment.code }}</b></p>
+  <a class="btn btn--navy" href="{% url 'core:home' %}">{% translate "Back to home" %}</a>
+</div>
+{% endblock %}

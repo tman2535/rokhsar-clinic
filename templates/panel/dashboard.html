@@ -1,0 +1,90 @@
+{% extends "panel/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Dashboard" %}{% endblock %}
+{% block heading %}{% blocktranslate with name=request.user.first_name|default:request.user.username %}Hello, {{ name }}{% endblocktranslate %}{% endblock %}
+{% block subheading %}<p class="pn-muted">{{ today|jdate }}</p>{% endblock %}
+{% block content %}
+<section class="kpis" aria-label="{% translate 'Summary' %}">
+  <a class="kpi" href="{% url 'panel:appointments' %}?when=today"><span class="kpi__ic">{% icon "calendar" %}</span><span class="kpi__label">{% translate "Appointments today" %}</span><b class="kpi__value">{{ stats.today|ldigits }}</b></a>
+  <a class="kpi kpi--warn" href="{% url 'panel:appointments' %}?status=pending"><span class="kpi__ic">{% icon "phone" %}</span><span class="kpi__label">{% translate "Waiting for a call" %}</span><b class="kpi__value">{{ stats.pending|ldigits }}</b></a>
+  <a class="kpi" href="{% url 'panel:appointments' %}?when=week"><span class="kpi__ic">{% icon "clock" %}</span><span class="kpi__label">{% translate "Next 7 days" %}</span><b class="kpi__value">{{ stats.week|ldigits }}</b></a>
+  <a class="kpi" href="{% url 'panel:chats' %}"><span class="kpi__ic">{% icon "chat" %}</span><span class="kpi__label">{% translate "Unread conversations" %}</span><b class="kpi__value">{{ stats.unread|ldigits }}</b></a>
+</section>
+
+<div class="pn-grid">
+  <section class="pn-card" aria-labelledby="pending-h">
+    <header class="pn-card__head">
+      <h2 id="pending-h">{% translate "Waiting for a call" %}</h2>
+      <a class="link" href="{% url 'panel:appointments' %}?status=pending">{% translate "See all" %}</a>
+    </header>
+    {% if pending %}
+    <ul class="pn-list">
+      {% for a in pending %}
+      <li class="pn-row">
+        <a class="pn-row__main" href="{{ a.get_panel_url }}">
+          <b>{{ a.full_name }}</b>
+          <span>{% if a.procedure %}{{ a.procedure|tr:"title" }} · {% endif %}{{ a.preferred_date|jdate:"weekday" }} · {{ a.time_slot|ldigits }}</span>
+        </a>
+        <a class="btn btn--line btn--sm" href="tel:{{ a.phone }}" dir="ltr">{% icon "phone" %} {{ a.phone|ldigits }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}<p class="pn-empty">{% translate "Nobody is waiting. Nice work." %}</p>{% endif %}
+  </section>
+
+  <section class="pn-card" aria-labelledby="up-h">
+    <header class="pn-card__head">
+      <h2 id="up-h">{% translate "Upcoming appointments" %}</h2>
+      <a class="link" href="{% url 'panel:appointments' %}?when=upcoming">{% translate "See all" %}</a>
+    </header>
+    {% if upcoming %}
+    <ul class="pn-list">
+      {% for a in upcoming %}
+      <li class="pn-row">
+        <span class="pn-date"><b>{{ a.preferred_date|jdate:"short"|slice:"5:" }}</b><small>{{ a.time_slot|ldigits }}</small></span>
+        <a class="pn-row__main" href="{{ a.get_panel_url }}"><b>{{ a.full_name }}</b><span>{{ a.procedure|tr:"title" }}</span></a>
+        {% include "panel/includes/status.html" %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}<p class="pn-empty">{% translate "No upcoming appointments yet." %}</p>{% endif %}
+  </section>
+
+  <section class="pn-card" aria-labelledby="chat-h">
+    <header class="pn-card__head">
+      <h2 id="chat-h">{% translate "Open conversations" %}</h2>
+      <a class="link" href="{% url 'panel:chats' %}">{% translate "Inbox" %}</a>
+    </header>
+    {% if threads %}
+    <ul class="pn-list">
+      {% for t in threads %}
+      <li class="pn-row">
+        <a class="pn-row__main" href="{{ t.get_panel_url }}">
+          <b>{{ t.visitor_name }} {% if t.unread_for_staff %}<i class="dot-new" aria-label="{% translate 'Unread' %}"></i>{% endif %}</b>
+          <span>{% icon "file" %} {{ t.page_context.title|default:"—" }}{% if t.page_context.section %} · {{ t.page_context.section }}{% endif %}</span>
+        </a>
+        <span class="pill pill--{% if t.recipient == 'doctor' %}info{% else %}muted{% endif %}">{{ t.get_recipient_display }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}<p class="pn-empty">{% translate "No open conversations." %}</p>{% endif %}
+  </section>
+
+  <section class="pn-card" aria-labelledby="top-h">
+    <header class="pn-card__head"><h2 id="top-h">{% translate "Most requested (30 days)" %}</h2></header>
+    {% if top %}
+    <ul class="bars">
+      {% for row in top %}
+      {% with first=top.0.n %}
+      <li>
+        <span>{% if LANG == "en" %}{{ row.procedure__title_en|default:row.procedure__title_fa }}{% elif LANG == "ar" %}{{ row.procedure__title_ar|default:row.procedure__title_fa }}{% else %}{{ row.procedure__title_fa|default:"—" }}{% endif %}</span>
+        <span class="bars__track"><span class="bars__fill" style="width: {% widthratio row.n first 100 %}%"></span></span>
+        <b>{{ row.n|ldigits }}</b>
+      </li>
+      {% endwith %}
+      {% endfor %}
+    </ul>
+    {% else %}<p class="pn-empty">{% translate "Requests will show up here." %}</p>{% endif %}
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load i18n %}
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="brand brand--footer" href="{% url 'core:home' %}">
+        {% icon "logo" "brand__mark" %}<span class="brand__name">{{ clinic|tr:"clinic_name" }}</span>
+      </a>
+      <p>{{ clinic|tr:"tagline" }}</p>
+      <div class="socials">
+        {% if clinic.instagram %}<a class="icon-btn icon-btn--ghost" href="https://instagram.com/{{ clinic.instagram }}" rel="noopener" target="_blank" aria-label="Instagram">{% icon "instagram" %}</a>{% endif %}
+        {% if clinic.telegram %}<a class="icon-btn icon-btn--ghost" href="https://t.me/{{ clinic.telegram }}" rel="noopener" target="_blank" aria-label="Telegram">{% icon "telegram" %}</a>{% endif %}
+        {% if clinic.whatsapp %}<a class="icon-btn icon-btn--ghost" href="https://wa.me/{{ clinic.whatsapp }}" rel="noopener" target="_blank" aria-label="WhatsApp">{% icon "whatsapp" %}</a>{% endif %}
+      </div>
+    </div>
+    <nav class="site-footer__col" aria-label="{% translate 'Treatments' %}">
+      <p class="site-footer__title">{% translate "Treatments" %}</p>
+      <ul>
+        {% for cat in NAV_CATEGORIES %}{% for p in cat.live_procedures|slice:":2" %}
+        <li><a href="{{ p.get_absolute_url }}">{{ p|tr:"title" }}</a></li>
+        {% endfor %}{% endfor %}
+      </ul>
+    </nav>
+    <nav class="site-footer__col" aria-label="{% translate 'Clinic' %}">
+      <p class="site-footer__title">{% translate "Clinic" %}</p>
+      <ul>
+        <li><a href="{% url 'procedures:results' %}">{% translate "Before & after" %}</a></li>
+        <li><a href="{% url 'core:home' %}#doctor">{% translate "The doctor" %}</a></li>
+        <li><a href="{% url 'core:home' %}#faq">{% translate "Questions" %}</a></li>
+        <li><a href="{% url 'bookings:form' %}">{% translate "Book a visit" %}</a></li>
+      </ul>
+    </nav>
+    <div class="site-footer__col">
+      <p class="site-footer__title">{% translate "Contact" %}</p>
+      <ul class="site-footer__contact">
+        {% if clinic.phone %}<li>{% icon "phone" %}<a href="tel:{{ clinic.phone }}" dir="ltr">{{ clinic.phone|ldigits }}</a></li>{% endif %}
+        {% if clinic|tr:"address" %}<li>{% icon "pin" %}<span>{{ clinic|tr:"address" }}</span></li>{% endif %}
+        {% if clinic|tr:"working_hours" %}<li>{% icon "clock" %}<span>{{ clinic|tr:"working_hours" }}</span></li>{% endif %}
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__bottom">
+    <p>© {% now "Y" as year %}{{ year|ldigits }} {{ clinic|tr:"clinic_name" }}{% if clinic.license_number %} · {% translate "Medical council no." %} {{ clinic.license_number|ldigits }}{% endif %}</p>
+    <p>{% translate "Results differ from person to person. Photos are published with patients' written consent." %}</p>
+    {% if DEMO_CONTENT %}<p class="demo-note">{% translate "Demo version: the doctor profile, patient stories and before/after images are samples." %}</p>{% endif %}
+  </div>
+</footer>

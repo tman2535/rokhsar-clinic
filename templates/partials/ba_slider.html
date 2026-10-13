@@ -1,0 +1,29 @@
+{% load i18n %}{# Params: case, eager (bool), hero (bool) #}
+<figure class="ba-card{% if hero %} ba-card--hero{% endif %}">
+  <div class="ba" data-ba{% if hero %} data-ba-intro{% endif %}>
+    <img class="ba__img" src="{{ case.before_image.url }}" alt="{% translate 'Before' %}: {{ case|tr:'title' }}"
+         width="1600" height="900" {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async" draggable="false">
+    <div class="ba__after">
+      <img class="ba__img" src="{{ case.after_image.url }}" alt="{% translate 'After' %}: {{ case|tr:'title' }}"
+           width="1600" height="900" {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async" draggable="false">
+    </div>
+    <span class="ba__tag ba__tag--before">{% translate "Before" %}</span>
+    <span class="ba__tag ba__tag--after">{% translate "After" %}</span>
+    <div class="ba__line" aria-hidden="true"></div>
+    {% if hero %}<span class="ba__hint" aria-hidden="true">{% icon "drag" %} {% translate "Drag the line to compare" %}</span>{% endif %}
+    <div class="ba__handle" role="slider" tabindex="0" aria-orientation="horizontal"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+         aria-label="{% translate 'Drag to compare before and after' %}">
+      {% icon "drag" %}
+    </div>
+  </div>
+  {% if not hero %}
+  <figcaption class="ba-card__cap">
+    <div>
+      <p class="ba-card__title">{{ case|tr:"title" }}</p>
+      <p class="ba-card__sub">{{ case|tr:"caption" }}</p>
+    </div>
+    <span class="chip">{% blocktranslate with m=case.months_after|ldigits count months=case.months_after %}{{ m }} month after{% plural %}{{ m }} months after{% endblocktranslate %}</span>
+  </figcaption>
+  {% endif %}
+</figure>

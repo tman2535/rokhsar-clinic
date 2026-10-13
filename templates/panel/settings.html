@@ -1,0 +1,55 @@
+{% extends "panel/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Settings" %}{% endblock %}
+{% block heading %}{% translate "Settings" %}{% endblock %}
+{% block content %}
+<div class="pn-split">
+  <section class="pn-card" aria-labelledby="ch-h">
+    <header class="pn-card__head">
+      <h2 id="ch-h">{% translate "Notification channels" %}</h2>
+      <a class="btn btn--navy btn--sm" href="{% url 'panel:channel_new' %}">{% icon "plus" %} {% translate "Add channel" %}</a>
+    </header>
+    <p class="pn-muted">{% translate "New appointments and chat messages are sent to every active channel. Telegram and Bale can also reply and confirm appointments." %}</p>
+    {% if channels %}
+    <ul class="pn-list">
+      {% for c in channels %}
+      <li class="pn-row">
+        <span class="kind kind--{{ c.kind }}">{% if c.kind == "telegram" or c.kind == "bale" %}{% icon "telegram" %}{% elif c.kind == "whatsapp" %}{% icon "whatsapp" %}{% elif c.kind == "email" %}{% icon "send" %}{% else %}{% icon "external" %}{% endif %}</span>
+        <a class="pn-row__main" href="{% url 'panel:channel_edit' c.pk %}"><b>{{ c.name }}</b><span>{{ c.get_kind_display }} · {% blocktranslate with ok=c.sent|ldigits bad=c.failed|ldigits %}{{ ok }} sent, {{ bad }} failed{% endblocktranslate %}</span></a>
+        <span class="pill pill--{% if c.is_active %}ok{% else %}muted{% endif %}">{% if c.is_active %}{% translate "Active" %}{% else %}{% translate "Off" %}{% endif %}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="pn-empty">{% translate "No channels yet. Add a Telegram bot to get appointments on your phone." %}</div>
+    {% endif %}
+
+    <details class="guide">
+      <summary>{% icon "telegram" %} {% translate "How to connect a Telegram bot (3 minutes)" %}</summary>
+      <ol>
+        <li>{% translate "In Telegram, open @BotFather, send /newbot and copy the token it gives you." %}</li>
+        <li>{% translate "Create a private group for the doctor and secretary and add the bot to it." %}</li>
+        <li>{% translate "Add a channel here with type “Telegram bot” and paste the token. Save." %}</li>
+        <li>{% translate "Press “Connect bot”, then send /id in the group. Paste the number it replies with into “Recipient” and save." %}</li>
+        <li>{% translate "Press “Send test message”. From now on you can reply to chats and confirm appointments inside Telegram." %}</li>
+      </ol>
+    </details>
+  </section>
+
+  <section class="pn-card" aria-labelledby="rules-h">
+    <header class="pn-card__head"><h2 id="rules-h">{% translate "Booking rules and contact" %}</h2></header>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% for field in rules %}
+      <div class="field">
+        <label class="field__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}<p class="pn-help">{{ field.help_text }}</p>{% endif %}
+        <p class="field__error">{{ field.errors|join:" " }}</p>
+      </div>
+      {% endfor %}
+      <button class="btn btn--navy" type="submit">{% icon "check" %} {% translate "Save" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

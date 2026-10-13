@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "All treatments" %} — {{ clinic|tr:"clinic_name" }}{% endblock %}
+{% block content %}
+<header class="container page-head">
+  <h1>{% translate "All treatments" %}</h1>
+  <p>{% translate "Surgical and non-surgical options. Each page covers candidates, steps, recovery and risks, with a booking form beside it." %}</p>
+</header>
+<div class="container" style="padding-bottom:96px">
+  {% for cat in categories %}
+  <section class="cat-block" aria-labelledby="cat-{{ cat.slug }}">
+    <h2 id="cat-{{ cat.slug }}">{% icon cat.icon %} {{ cat|tr:"name" }}</h2>
+    <ul class="cards">
+      {% for p in cat.live %}
+      <li class="card">
+        <span class="card__icon">{% icon p.icon %}</span>
+        <h3 class="card__title"><a href="{{ p.get_absolute_url }}">{{ p|tr:"title" }}</a></h3>
+        <p class="card__text">{{ p|tr:"summary" }}</p>
+        <dl class="card__facts">
+          <div><dt>{% icon "clock" %}<span class="sr-only">{% translate "Duration" %}</span></dt><dd>{{ p|tr:"duration" }}</dd></div>
+          <div><dt>{% icon "heart" %}<span class="sr-only">{% translate "Back to routine" %}</span></dt><dd>{{ p|tr:"recovery" }}</dd></div>
+        </dl>
+        <div class="card__actions">
+          <a class="link" href="{{ p.get_absolute_url }}">{% translate "Learn more" %} {% icon "arrow" "flip-rtl" %}</a>
+          <button class="btn btn--line btn--sm" type="button" data-open-booking="{{ p.pk }}">{% translate "Book" %}</button>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}

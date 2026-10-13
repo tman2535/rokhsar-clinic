@@ -1,0 +1,82 @@
+{% extends "panel/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Appointments" %}{% endblock %}
+{% block heading %}{% translate "Appointments" %}{% endblock %}
+{% block subheading %}<p class="pn-muted">{% blocktranslate with n=page.paginator.count|ldigits %}{{ n }} requests match{% endblocktranslate %}</p>{% endblock %}
+{% block content %}
+<form class="pn-filters" method="get" role="search">
+  <div class="pn-filters__chips" role="group" aria-label="{% translate 'Status' %}">
+    <a class="tab" href="?{% if filters.when %}when={{ filters.when }}{% endif %}" {% if not filters.status %}aria-selected="true"{% endif %}>{% translate "All" %}</a>
+    {% for value, label in statuses %}
+    <a class="tab" href="?status={{ value }}{% if filters.when %}&when={{ filters.when }}{% endif %}" {% if filters.status == value %}aria-selected="true"{% endif %}>{{ label }} <small>{{ counts|get_item:value|default:0|ldigits }}</small></a>
+    {% endfor %}
+  </div>
+  <div class="pn-filters__row">
+    <label class="pn-search">{% icon "search" %}<span class="sr-only">{% translate "Search" %}</span>
+      <input class="input" type="search" name="q" value="{{ filters.q }}" placeholder="{% translate 'Name, mobile or tracking code' %}"></label>
+    <div class="select"><select name="when" aria-label="{% translate 'Date' %}">
+      <option value="">{% translate "Any date" %}</option>
+      <option value="today" {% if filters.when == "today" %}selected{% endif %}>{% translate "Today" %}</option>
+      <option value="week" {% if filters.when == "week" %}selected{% endif %}>{% translate "Next 7 days" %}</option>
+      <option value="upcoming" {% if filters.when == "upcoming" %}selected{% endif %}>{% translate "Upcoming" %}</option>
+      <option value="past" {% if filters.when == "past" %}selected{% endif %}>{% translate "Past" %}</option>
+    </select>{% icon "chev-down" "select__chev" %}</div>
+    <div class="select"><select name="procedure" aria-label="{% translate 'Treatment' %}">
+      <option value="">{% translate "All treatments" %}</option>
+      {% for p in procedures %}<option value="{{ p.pk }}" {% if filters.procedure == p.pk|stringformat:"s" %}selected{% endif %}>{{ p|tr:"title" }}</option>{% endfor %}
+    </select>{% icon "chev-down" "select__chev" %}</div>
+    {% if filters.status %}<input type="hidden" name="status" value="{{ filters.status }}">{% endif %}
+    <button class="btn btn--navy" type="submit">{% translate "Filter" %}</button>
+    <a class="btn btn--line" href="{% url 'panel:appointments_csv' %}?{{ querystring }}">{% icon "download" %} {% translate "Excel (CSV)" %}</a>
+  </div>
+</form>
+
+<div class="pn-card pn-card--flush">
+  {% if page.object_list %}
+  <table class="pn-table">
+    <thead>
+      <tr>
+        <th scope="col">{% translate "Patient" %}</th>
+        <th scope="col">{% translate "Treatment" %}</th>
+        <th scope="col">{% translate "Date and time" %}</th>
+        <th scope="col">{% translate "Received" %}</th>
+        <th scope="col">{% translate "Status" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in page.object_list %}
+      <tr>
+        <td data-label="{% translate 'Patient' %}">
+          <a class="pn-strong" href="{{ a.get_panel_url }}">{{ a.full_name }}</a>
+          <a class="pn-sub" href="tel:{{ a.phone }}" dir="ltr">{{ a.phone|ldigits }}</a>
+        </td>
+        <td data-label="{% translate 'Treatment' %}">{{ a.procedure|tr:"title"|default:"—" }}</td>
+        <td data-label="{% translate 'Date and time' %}"><b>{{ a.preferred_date|jdate:"weekday" }}</b><span class="pn-sub">{{ a.time_slot|ldigits }}</span></td>
+        <td data-label="{% translate 'Received' %}"><span class="pn-sub">{{ a.created_at|jdate:"short" }}</span><span class="pn-sub" dir="ltr">{{ a.code }}</span></td>
+        <td data-label="{% translate 'Status' %}">
+          <form class="pn-status" method="post" action="{% url 'panel:appointment_status' a.pk %}" data-status-form>
+            {% csrf_token %}
+            <div class="select select--pill pill--{{ a.status_tone }}" data-status-wrap>
+              <select name="status" aria-label="{% translate 'Change status' %}" data-status-select>
+                {% for value, label in statuses %}<option value="{{ value }}" {% if a.status == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
+              </select>{% icon "chev-down" "select__chev" %}
+            </div>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="pn-empty">{% translate "No appointments match these filters." %}</p>
+  {% endif %}
+</div>
+
+{% if page.has_other_pages %}
+<nav class="pn-pager" aria-label="{% translate 'Pages' %}">
+  {% if page.has_previous %}<a class="btn btn--line btn--sm" href="?{{ querystring }}&page={{ page.previous_page_number }}">{% translate "Previous" %}</a>{% endif %}
+  <span>{% blocktranslate with n=page.number|ldigits total=page.paginator.num_pages|ldigits %}Page {{ n }} of {{ total }}{% endblocktranslate %}</span>
+  {% if page.has_next %}<a class="btn btn--line btn--sm" href="?{{ querystring }}&page={{ page.next_page_number }}">{% translate "Next" %}</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,86 @@
+{% load i18n %}{# Params: fid (unique id prefix), selected (Procedure or None), tone ("dark"|"light") #}
+<form class="bform bform--{{ tone|default:'light' }}" method="post" action="{% url 'bookings:submit' %}" data-booking-form novalidate>
+  {% csrf_token %}
+  <input type="hidden" name="preferred_date" data-date-value>
+  <input type="hidden" name="time_slot" data-slot-value>
+  <input type="hidden" name="source_url" data-source-url>
+  <input type="hidden" name="source_title" data-source-title>
+  <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+  <div class="bform__body" data-form-body>
+    <div class="field">
+      <label class="field__label" for="{{ fid }}-procedure">{% translate "Treatment" %}</label>
+      <div class="select">
+        <select id="{{ fid }}-procedure" name="procedure" required data-procedure-select>
+          <option value="">{% translate "Choose a treatment" %}</option>
+          {% for cat in NAV_CATEGORIES %}{% if cat.live_procedures %}
+          <optgroup label="{{ cat|tr:'name' }}">
+            {% for p in cat.live_procedures %}
+            <option value="{{ p.pk }}" {% if selected and selected.pk == p.pk %}selected{% endif %}>{{ p|tr:"title" }}</option>
+            {% endfor %}
+          </optgroup>
+          {% endif %}{% endfor %}
+        </select>
+        {% icon "chev-down" "select__chev" %}
+      </div>
+      <p class="field__error" data-error-for="procedure"></p>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label class="field__label" for="{{ fid }}-name">{% translate "Full name" %}</label>
+        <input class="input" id="{{ fid }}-name" name="full_name" type="text" autocomplete="name" maxlength="120" required>
+        <p class="field__error" data-error-for="full_name"></p>
+      </div>
+      <div class="field">
+        <label class="field__label" for="{{ fid }}-phone">{% translate "Mobile number" %}</label>
+        <input class="input input--ltr" id="{{ fid }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+               maxlength="20" placeholder="0912 345 6789" dir="ltr" required>
+        <p class="field__error" data-error-for="phone"></p>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field__label" id="{{ fid }}-date-label">{% translate "Preferred day" %}</span>
+      <div class="datefield" data-datefield>
+        <button class="input datefield__btn" type="button" aria-haspopup="dialog" aria-expanded="false"
+                aria-labelledby="{{ fid }}-date-label {{ fid }}-date-text" data-date-trigger>
+          {% icon "calendar" %}
+          <span id="{{ fid }}-date-text" class="datefield__text" data-date-text>{% translate "Choose a date" %}</span>
+          {% icon "chev-down" "datefield__chev" %}
+        </button>
+        <div class="datepicker" role="dialog" aria-modal="false" aria-label="{% translate 'Choose a date' %}" hidden data-datepicker></div>
+      </div>
+      <p class="field__error" data-error-for="preferred_date"></p>
+    </div>
+
+    <div class="field">
+      <span class="field__label" id="{{ fid }}-slot-label">{% translate "Time" %}</span>
+      <div class="slots" role="radiogroup" aria-labelledby="{{ fid }}-slot-label" data-slots>
+        <p class="slots__hint">{% translate "Choose a date to see free times." %}</p>
+      </div>
+      <p class="field__error" data-error-for="time_slot"></p>
+    </div>
+
+    <details class="field field--note">
+      <summary>{% icon "plus" %} {% translate "Add a note (optional)" %}</summary>
+      <label class="sr-only" for="{{ fid }}-note">{% translate "Note" %}</label>
+      <textarea class="input" id="{{ fid }}-note" name="note" rows="2" maxlength="600"
+                placeholder="{% translate 'e.g. I have had nose surgery before' %}"></textarea>
+    </details>
+
+    <p class="bform__error" role="alert" data-form-error></p>
+    <button class="btn btn--gold btn--block" type="submit" data-submit>
+      <span>{% translate "Request appointment" %}</span>
+    </button>
+    <p class="bform__note">{% icon "shield" %} {% translate "The secretary calls you to confirm. Your details are only used to arrange this visit." %}</p>
+  </div>
+
+  <div class="bform__done" hidden data-form-done tabindex="-1">
+    <span class="bform__done-icon">{% icon "check-circle" %}</span>
+    <p class="bform__done-title">{% translate "Your request is in" %}</p>
+    <p class="bform__done-text" data-done-text></p>
+    <p class="bform__done-code">{% translate "Tracking code" %}: <b dir="ltr" data-done-code></b></p>
+    <button class="btn btn--line" type="button" data-form-reset>{% translate "Book another visit" %}</button>
+  </div>
+</form>
